@@ -43,11 +43,23 @@
       "skillPath": "grill-me/SKILL.md",
       "computedHash": "81770c424f4bcbe02503f997d1e633e4e62974e537c824af4780e9161b7e20e7"
     },
+    "human-writing": {
+      "source": "idaibin/skills",
+      "sourceType": "github",
+      "skillPath": "skills/human-writing/SKILL.md",
+      "computedHash": "cc43112ffcfd7caa329d4241498a3ab05ed84bed3919a6e5b84b55a10b98d866"
+    },
     "information-architecture": {
       "source": "julianoczkowski/designer-skills",
       "sourceType": "github",
       "skillPath": "information-architecture/SKILL.md",
       "computedHash": "42b3b96103c0c910ff73841b9c843c8be8111c3d1fdc0746c07d911a23335191"
+    },
+    "research": {
+      "source": "tejas-kale/skills",
+      "sourceType": "github",
+      "skillPath": "skills/research/SKILL.md",
+      "computedHash": "c8c1cba327a6f824b554cd978079a3dadd7406d73174f8fb9bfef58824691970"
     }
   }
 }

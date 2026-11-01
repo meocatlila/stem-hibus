@@ -39,4 +39,56 @@
       );
     })
     .join("");
+
+  var button = document.getElementById("copy-prompt");
+  var prompt = document.getElementById("vibe-prompt");
+  var status = document.getElementById("copy-status");
+  if (!button || !prompt || !status) return;
+  function selectPrompt() {
+    var range = document.createRange();
+    range.selectNodeContents(prompt);
+    var selection = window.getSelection();
+    selection.removeAllRanges();
+    selection.addRange(range);
+  }
+  function copyWithSelection(text) {
+    var area = document.createElement("textarea");
+    area.value = text;
+    area.setAttribute("readonly", "");
+    area.style.position = "fixed";
+    area.style.top = "0";
+    area.style.left = "0";
+    area.style.opacity = "0";
+    document.body.appendChild(area);
+    area.focus();
+    area.select();
+    var ok = false;
+    try {
+      ok = document.execCommand("copy");
+    } catch (err) {
+      ok = false;
+    }
+    document.body.removeChild(area);
+    return ok;
+  }
+  button.addEventListener("click", function () {
+    var text = prompt.textContent;
+    function done() {
+      status.textContent = "คัดลอกข้อความแล้ว นำไปวางในห้องใหม่ได้";
+    }
+    function failed() {
+      selectPrompt();
+      status.textContent = "เลือกข้อความให้แล้ว กดคัดลอกจากเมนูหรือกด Ctrl+C ได้เลย";
+    }
+    var viaClipboard = navigator.clipboard && window.isSecureContext && navigator.clipboard.writeText;
+    if (viaClipboard) {
+      navigator.clipboard.writeText(text).then(done, function () {
+        if (copyWithSelection(text)) done();
+        else failed();
+      });
+      return;
+    }
+    if (copyWithSelection(text)) done();
+    else failed();
+  });
 })();

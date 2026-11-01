@@ -1,0 +1,4 @@
+interface:
+  display_name: "Human Writing"
+  short_description: "Draft, edit, diagnose, or adapt source-grounded prose"
+  default_prompt: "Use $human-writing to draft or edit this prose for its intended reader while preserving facts, uncertainty, protected text, and the author's voice."
