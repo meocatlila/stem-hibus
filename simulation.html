@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="th" data-theme="light">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>ไฮบัส · จำลองการเดินทาง</title>
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="simulation.css">
+  </head>
+  <body>
+    <a class="skip" href="#panel">ข้ามไปแผนการเดินทาง</a>
+    <div class="app">
+      <header class="site-header">
+        <a class="brand" href="index.html">
+          <span class="wordmark">HIBUS</span>
+          <span class="brand-th">ไฮบัส</span>
+        </a>
+        <p class="clock num" id="clock">08:12</p>
+        <nav class="site-nav">
+          <a href="infographic.html">ภาพรวม</a>
+          <a href="simulation.html" aria-current="page">จำลองแอป</a>
+          <button class="theme-btn" id="theme" type="button">ธีมเข้ม</button>
+        </nav>
+      </header>
+      <div class="stage">
+        <div class="map-wrap">
+          <svg id="map" aria-label="แผนผังสายรถเมืองสาธิต เส้นคู่คือช่องลอดใต้รถยกสูง"></svg>
+          <div class="legend">
+            <span><i class="swatch h1"></i>H1 สายหลัก ทุก 8 นาที</span>
+            <span><i class="swatch h2"></i>H2 สายเชื่อม ทุก 10 นาที</span>
+            <span><i class="swatch h3"></i>H3 สายสนามกีฬา ทุก 12 นาที</span>
+            <span><i class="swatch you"></i>ตำแหน่งผู้ใช้</span>
+          </div>
+          <p class="map-note">แผนผังไม่ใช้มาตราส่วนภูมิศาสตร์ เวลาและค่าโดยสารคิดจากระยะในตารางป้าย เวลาอ้างอิงของสาธิตคือ 08:12 น.</p>
+        </div>
+        <section class="panel" id="panel"></section>
+      </div>
+      <footer class="controls" id="controls"></footer>
+    </div>
+    <script src="network.js"></script>
+    <script src="map.js"></script>
+    <script src="theme.js"></script>
+    <script src="simulation.js"></script>
+  </body>
+</html>

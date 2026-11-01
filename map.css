@@ -1,0 +1,96 @@
+.map-wrap {
+  background: var(--color-bg-primary);
+  min-height: 280px;
+}
+
+.map-wrap svg {
+  width: 100%;
+  height: auto;
+  min-height: 320px;
+}
+
+.guide {
+  stroke: var(--color-text-tertiary);
+  stroke-width: 1.5;
+  stroke-dasharray: 4 5;
+}
+
+.route-bed {
+  fill: none;
+  stroke-width: 16;
+  stroke-linecap: square;
+  stroke-linejoin: miter;
+}
+
+.route-slot {
+  fill: none;
+  stroke: var(--color-bg-primary);
+  stroke-width: 6;
+  stroke-linecap: square;
+  stroke-linejoin: miter;
+}
+
+.stop {
+  fill: var(--color-bg-primary);
+  stroke-width: 3;
+}
+
+.stop-name,
+.you-label {
+  font-family: var(--font-family-body);
+  font-size: 13px;
+  fill: var(--color-text-primary);
+}
+
+.stop-code,
+.bus-code {
+  font-family: var(--font-family-display);
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.bus-code {
+  fill: #ffffff;
+  font-size: 12px;
+}
+
+.door {
+  fill: none;
+  stroke: var(--color-text-primary);
+  stroke-width: 2;
+}
+
+.plan-walk {
+  stroke: var(--color-text-primary);
+  stroke-width: 1.75;
+  stroke-dasharray: 2 4;
+}
+
+.map-note,
+.legend {
+  margin: 0;
+  padding: 0 var(--space-4) var(--space-3);
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-sm);
+}
+
+.legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3) var(--space-4);
+}
+
+.swatch {
+  display: inline-block;
+  width: 1.1rem;
+  height: 0.45rem;
+  margin-right: 0.35rem;
+  vertical-align: middle;
+  border: 3px solid var(--color-bg-primary);
+  box-shadow: 0 0 0 1px var(--color-border-primary);
+}
+
+.swatch.h1 { background: var(--route-h1); }
+.swatch.h2 { background: var(--route-h2); }
+.swatch.h3 { background: var(--route-h3); }
+.swatch.you { background: var(--you); }

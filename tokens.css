@@ -1,0 +1,120 @@
+/* HIBUS tokens
+   Philosophy: Swiss transit wayfinding.
+   Paper, ink, and one signal yellow. Route colors carry information only.
+   Corners stay square. Shadows stay off. Default theme is light so a
+   classroom projector does not follow a dark operating system. */
+
+:root {
+  color-scheme: light;
+  --color-bg-primary: #efe7d6;
+  --color-bg-secondary: #f7f3ea;
+  --color-bg-tertiary: #e5dccb;
+  --color-bg-inverse: #17191c;
+  --color-text-primary: #17191c;
+  --color-text-secondary: #3a352e;
+  --color-text-tertiary: #5c564c;
+  --color-text-inverse: #f4eee4;
+  --color-text-link: #17191c;
+  --color-border-primary: #17191c;
+  --color-border-secondary: #cfc3ae;
+  --color-border-focus: #17191c;
+  --color-accent-primary: #17191c;
+  --color-accent-primary-hover: #30343a;
+  --color-accent-primary-active: #000000;
+  --color-accent-secondary: #f0b429;
+  --color-status-success: #0f6e62;
+  --color-status-warning: #8a5a00;
+  --color-status-error: #8d2d2d;
+  --color-status-info: #1d4e89;
+  --color-surface-overlay: rgba(23, 25, 28, 0.72);
+  --you: #f0b429;
+  --route-h1: #0f6e62;
+  --route-h2: #c2410c;
+  --route-h3: #1d4e89;
+  --route-h1-ink: #0b5c52;
+  --route-h2-ink: #9a3412;
+  --route-h3-ink: #1d4e89;
+  --font-family-display: "Barlow Condensed", "Arial Narrow", sans-serif;
+  --font-family-body: "IBM Plex Sans Thai", "Leelawadee UI", Tahoma, sans-serif;
+  --font-family-mono: "IBM Plex Sans Thai", ui-monospace, monospace;
+  --font-size-xs: 0.75rem;
+  --font-size-sm: 0.875rem;
+  --font-size-base: 1rem;
+  --font-size-md: 1.25rem;
+  --font-size-lg: 1.75rem;
+  --font-size-xl: 2.5rem;
+  --font-size-2xl: 3.5rem;
+  --font-size-3xl: 4.5rem;
+  --font-size-4xl: 6rem;
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+  --line-height-tight: 1.05;
+  --line-height-normal: 1.45;
+  --line-height-relaxed: 1.6;
+  --letter-spacing-tight: -0.03em;
+  --letter-spacing-normal: 0;
+  --letter-spacing-wide: 0.08em;
+  --space-0: 0;
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.5rem;
+  --space-6: 2rem;
+  --space-7: 3rem;
+  --space-8: 4rem;
+  --space-9: 6rem;
+  --space-10: 8rem;
+  --space-11: 12rem;
+  --space-12: 16rem;
+  --max-width-content: 68ch;
+  --max-width-wide: 1120px;
+  --max-width-page: 1280px;
+  --border-radius-sm: 0;
+  --border-radius-md: 0;
+  --border-radius-lg: 0;
+  --border-radius-full: 999px;
+  --shadow-sm: none;
+  --shadow-md: none;
+  --shadow-lg: none;
+  --shadow-focus: 0 0 0 2px var(--color-bg-primary), 0 0 0 4px var(--color-border-focus);
+  --duration-instant: 50ms;
+  --duration-fast: 150ms;
+  --duration-normal: 250ms;
+  --duration-slow: 400ms;
+  --duration-slower: 600ms;
+  --easing-default: cubic-bezier(0.4, 0, 0.2, 1);
+  --easing-in: cubic-bezier(0.4, 0, 1, 1);
+  --easing-out: cubic-bezier(0, 0, 0.2, 1);
+  --breakpoint-sm: 375px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 1024px;
+  --breakpoint-xl: 1280px;
+  --breakpoint-2xl: 1536px;
+}
+
+[data-theme="dark"] {
+  color-scheme: dark;
+  --color-bg-primary: #12151a;
+  --color-bg-secondary: #1a1f27;
+  --color-bg-tertiary: #262c36;
+  --color-bg-inverse: #efe7d6;
+  --color-text-primary: #f4eee4;
+  --color-text-secondary: #ddd4c6;
+  --color-text-tertiary: #b7ad9e;
+  --color-text-inverse: #17191c;
+  --color-text-link: #f4eee4;
+  --color-border-primary: #f4eee4;
+  --color-border-secondary: #3c4450;
+  --color-border-focus: #f0b429;
+  --color-accent-primary: #f4eee4;
+  --color-accent-primary-hover: #fff8ee;
+  --color-accent-primary-active: #ffffff;
+  --color-surface-overlay: rgba(0, 0, 0, 0.72);
+  --route-h1-ink: #8ee8d8;
+  --route-h2-ink: #ffc2a8;
+  --route-h3-ink: #d3e4ff;
+  --shadow-focus: 0 0 0 2px var(--color-bg-primary), 0 0 0 4px var(--color-border-focus);
+}
