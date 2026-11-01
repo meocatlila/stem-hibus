@@ -4,7 +4,7 @@
 
   var labelAt = {
     home: { dx: 16, dy: 6, anchor: "start" },
-    suanthong: { dx: 0, dy: -16, anchor: "middle" },
+    suanthong: { dx: -84, dy: -46, anchor: "start" },
     "market-h2": { dx: 0, dy: -16, anchor: "middle" },
     park: { dx: 0, dy: -16, anchor: "middle" },
     uni: { dx: 0, dy: -16, anchor: "middle" },
@@ -84,17 +84,20 @@
         );
         var place = labelAt[id];
         if (!place) return;
-        var text = el("text", {
-          x: point.x + place.dx,
-          y: point.y + place.dy,
-          "text-anchor": place.anchor,
-          class: "stop-name",
+        var lines = point.labelLines || [point.name];
+        lines.forEach(function (lineText, index) {
+          var text = el("text", {
+            x: point.x + place.dx,
+            y: point.y + place.dy + index * 15,
+            "text-anchor": place.anchor,
+            class: "stop-name",
+          });
+          text.textContent = lineText;
+          layer.appendChild(text);
         });
-        text.textContent = point.name;
-        layer.appendChild(text);
         var code = el("text", {
           x: point.x + place.dx,
-          y: point.y + place.dy + 13,
+          y: point.y + place.dy + lines.length * 15,
           "text-anchor": place.anchor,
           class: "stop-code",
           fill: "var(--route-" + line.id.toLowerCase() + "-ink)",

@@ -15,7 +15,13 @@
 
   const nodes = {
     home: { x: 132, y: 338, name: "หมู่บ้านสวนทอง", detail: "หน้าซอย 4" },
-    suanthong: { x: 132, y: 198, name: "สวนทอง", platform: "H2" },
+    suanthong: {
+      x: 132,
+      y: 198,
+      name: "โรงเรียนเซนต์ฟรังค์ซิสซาเวียร์คอนแวนต์",
+      labelLines: ["โรงเรียนเซนต์ฟรังค์", "ซิสซาเวียร์คอนแวนต์"],
+      platform: "H2",
+    },
     "market-h2": { x: 352, y: 198, name: "แยกตลาด", platform: "H2" },
     park: { x: 640, y: 198, name: "สวนสาธารณะ", platform: "H2" },
     uni: { x: 900, y: 198, name: "มหาวิทยาลัย", platform: "H2" },
@@ -72,7 +78,7 @@
   ];
 
   const walks = [
-    { from: "home", to: "suanthong", minutes: 4, meters: 280, label: "เดินไปป้ายสวนทอง" },
+    { from: "home", to: "suanthong", minutes: 4, meters: 280, label: "เดินไปป้ายโรงเรียนเซนต์ฟรังค์ซิสซาเวียร์คอนแวนต์" },
     { from: "home", to: "market-h1", minutes: 20, meters: 1400, label: "เดินไปป้ายแยกตลาด สาย H1" },
     { from: "market-h2", to: "market-h1", minutes: 2, meters: 120, label: "เดินเปลี่ยนไปชานชาลาสาย H1" },
     { from: "station-h1", to: "station-h3", minutes: 3, meters: 180, label: "เดินเปลี่ยนไปชานชาลาสาย H3" },

@@ -267,7 +267,7 @@
         .join("") +
       "</ul>" +
       (here.nextBus
-        ? "<p>สาย H2 รอบถัดไปที่สวนทอง " +
+        ? "<p>สาย H2 รอบถัดไปที่" + esc(H.nodes.suanthong.name) + " " +
           H.formatTime(here.nextBus.depart) +
           " น. · รอบ " +
           H.formatTime(here.nextBus.missed) +
