@@ -4,7 +4,7 @@
 
   var labelAt = {
     home: { dx: 16, dy: 6, anchor: "start" },
-    suanthong: { dx: -84, dy: -46, anchor: "start" },
+    suanthong: { dx: 0, dy: -54, anchor: "middle", size: 12 },
     "market-h2": { dx: 0, dy: -16, anchor: "middle" },
     park: { dx: 0, dy: -16, anchor: "middle" },
     uni: { dx: 0, dy: -16, anchor: "middle" },
@@ -92,6 +92,7 @@
             "text-anchor": place.anchor,
             class: "stop-name",
           });
+          if (place.size) text.setAttribute("font-size", place.size);
           text.textContent = lineText;
           layer.appendChild(text);
         });
@@ -118,7 +119,7 @@
   }
 
   function createMap(svg) {
-    svg.setAttribute("viewBox", "40 28 1000 690");
+    svg.setAttribute("viewBox", "0 16 1040 702");
     svg.setAttribute("role", "img");
     var title = el("title");
     title.textContent = "แผนผังสายไฮบัสในเมืองสาธิต";

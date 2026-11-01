@@ -8,7 +8,6 @@ before they try IPv4.
 
 import argparse
 import socket
-from functools import partial
 from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
 
 
@@ -25,12 +24,26 @@ class DualStackServer(ThreadingHTTPServer):
         return
 
 
+def make_handler(directory):
+    class DemoHandler(SimpleHTTPRequestHandler):
+        def __init__(self, *args, **kwargs):
+            super().__init__(*args, directory=directory, **kwargs)
+
+        def end_headers(self):
+            # Judges refresh the same URL between rehearsals. Do not keep old map labels.
+            self.send_header("Cache-Control", "no-store, no-cache, must-revalidate")
+            self.send_header("Pragma", "no-cache")
+            super().end_headers()
+
+    return DemoHandler
+
+
 def main():
     parser = argparse.ArgumentParser(description="Serve the HIBUS demo.")
     parser.add_argument("--port", type=int, default=8741)
     parser.add_argument("--directory", default=".")
     args = parser.parse_args()
-    handler = partial(SimpleHTTPRequestHandler, directory=args.directory)
+    handler = make_handler(args.directory)
     server = DualStackServer(("::", args.port), handler)
     print(f"HIBUS demo on http://localhost:{args.port}/", flush=True)
     server.serve_forever()

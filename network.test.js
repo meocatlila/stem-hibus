@@ -33,4 +33,13 @@ assert(late.reasons[0].indexOf("08:30") !== -1, "late catches 08:30");
 const unknown = H.matchPlace("สนามบิน");
 assert(unknown.error === "none", "unknown place");
 
+const stop = H.nodes.suanthong;
+assert(
+  stop.name === "โรงเรียนเซนต์ฟรังค์ซิสซาเวียร์คอนแวนต์",
+  "nearest stop name"
+);
+assert(stop.labelLines.join("") === stop.name, "map label is the full stop name");
+assert(stop.name.indexOf("สวนทอง") === -1, "stop is not สวนทอง");
+assert(H.nodes.home.name === "หมู่บ้านสวนทอง", "origin stays the village");
+
 console.log("network.test.js ok");
