@@ -163,7 +163,8 @@ body.overview {
 #aims,
 #benefits,
 #build,
-#app {
+#app,
+#prompt {
   font-family: "THSarabunPSK", "Leelawadee UI", Tahoma, serif;
   font-size: 1.55rem;
   line-height: 1.35;
@@ -210,7 +211,15 @@ body.overview {
 #app .scene h3,
 #app .scene p,
 #app .scene li,
-#app .scene .nums span {
+#app .scene .nums span,
+#prompt .folio,
+#prompt .folio span,
+#prompt h2,
+#prompt h3,
+#prompt .lede,
+#prompt .prompt-bar,
+#prompt .prompt,
+#prompt .quiet {
   font-family: inherit;
   letter-spacing: 0;
 }
@@ -218,7 +227,8 @@ body.overview {
 #aims .folio,
 #benefits .folio,
 #build .folio,
-#app .folio {
+#app .folio,
+#prompt .folio {
   font-size: 1.35rem;
   font-weight: 700;
   color: var(--color-text-primary);
@@ -227,7 +237,8 @@ body.overview {
 #aims .folio span,
 #benefits .folio span,
 #build .folio span,
-#app .folio span {
+#app .folio span,
+#prompt .folio span {
   font-size: 1.7rem;
   font-weight: 700;
 }
@@ -235,7 +246,8 @@ body.overview {
 #aims h2,
 #benefits h2,
 #build h2,
-#app h2 {
+#app h2,
+#prompt h2 {
   max-width: none;
   font-size: 2.15rem;
   font-weight: 700;
@@ -262,7 +274,8 @@ body.overview {
 #app .param-list strong,
 #app .flow strong,
 #app .scene h3,
-#app .scene strong {
+#app .scene strong,
+#prompt h3 {
   font-size: 1.45rem;
   font-weight: 700;
   color: var(--color-text-primary);
@@ -282,7 +295,10 @@ body.overview {
 #app .flow span,
 #app .quiet,
 #app .scene p,
-#app .scene li {
+#app .scene li,
+#prompt .lede,
+#prompt .prompt,
+#prompt .quiet {
   font-size: 1.4rem;
   line-height: 1.4;
 }
@@ -300,7 +316,9 @@ body.overview {
 #app .flow span,
 #app .quiet,
 #app .scene p,
-#app .scene li {
+#app .scene li,
+#prompt .lede,
+#prompt .quiet {
   color: var(--color-text-secondary);
 }
 
@@ -320,8 +338,17 @@ body.overview {
 #build .prose h3,
 #build .after,
 #app h3,
-#app .after {
+#app .after,
+#prompt h3 {
   margin-top: 0;
+  color: var(--color-text-primary);
+}
+
+#prompt h3 {
+  margin: 0.85rem 0 0.45rem;
+}
+
+#prompt .prompt {
   color: var(--color-text-primary);
 }
 
