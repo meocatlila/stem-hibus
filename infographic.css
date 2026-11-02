@@ -224,10 +224,10 @@ body.overview {
 #ask .folio,
 #ask .folio span,
 #ask h2,
-#ask .faq,
-#ask .faq dt,
-#ask .faq dd,
-#ask .faq strong {
+#ask .ask-list,
+#ask .ask-list strong,
+#ask .ask-list span,
+#ask .ask-list b {
   font-family: inherit;
   letter-spacing: 0;
 }
@@ -310,10 +310,10 @@ body.overview {
 #prompt .lede,
 #prompt .prompt,
 #prompt .quiet,
-#ask .faq dt,
-#ask .faq dd {
+#ask .ask-list strong,
+#ask .ask-list span {
   font-size: 1.4rem;
-  line-height: 1.4;
+  line-height: 1.45;
 }
 
 #benefits .lede,
@@ -583,9 +583,36 @@ body.overview {
   color: var(--color-text-secondary);
 }
 
-#ask .faq strong {
+#ask .ask-list {
+  margin: 1.1rem 0 0;
+  padding: 0;
+  list-style: none;
+  max-width: 52rem;
+}
+
+#ask .ask-list li {
+  display: grid;
+  gap: 0.35rem;
+  padding: 1rem 0;
+  border-top: 1px solid var(--color-border-secondary);
+}
+
+#ask .ask-list strong {
+  display: block;
+  font-size: 1.45rem;
+  font-weight: 700;
   color: var(--color-text-primary);
-  margin-right: 0.25rem;
+}
+
+#ask .ask-list span {
+  display: block;
+  color: var(--color-text-secondary);
+}
+
+#ask .ask-list b {
+  color: var(--color-text-primary);
+  font-weight: 700;
+  margin-right: 0.3rem;
 }
 
 section[id] {
