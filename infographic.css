@@ -164,7 +164,8 @@ body.overview {
 #benefits,
 #build,
 #app,
-#prompt {
+#prompt,
+#ask {
   font-family: "THSarabunPSK", "Leelawadee UI", Tahoma, serif;
   font-size: 1.55rem;
   line-height: 1.35;
@@ -219,7 +220,14 @@ body.overview {
 #prompt .lede,
 #prompt .prompt-bar,
 #prompt .prompt,
-#prompt .quiet {
+#prompt .quiet,
+#ask .folio,
+#ask .folio span,
+#ask h2,
+#ask .faq,
+#ask .faq dt,
+#ask .faq dd,
+#ask .faq strong {
   font-family: inherit;
   letter-spacing: 0;
 }
@@ -228,7 +236,8 @@ body.overview {
 #benefits .folio,
 #build .folio,
 #app .folio,
-#prompt .folio {
+#prompt .folio,
+#ask .folio {
   font-size: 1.35rem;
   font-weight: 700;
   color: var(--color-text-primary);
@@ -238,7 +247,8 @@ body.overview {
 #benefits .folio span,
 #build .folio span,
 #app .folio span,
-#prompt .folio span {
+#prompt .folio span,
+#ask .folio span {
   font-size: 1.7rem;
   font-weight: 700;
 }
@@ -247,7 +257,8 @@ body.overview {
 #benefits h2,
 #build h2,
 #app h2,
-#prompt h2 {
+#prompt h2,
+#ask h2 {
   max-width: none;
   font-size: 2.15rem;
   font-weight: 700;
@@ -298,7 +309,9 @@ body.overview {
 #app .scene li,
 #prompt .lede,
 #prompt .prompt,
-#prompt .quiet {
+#prompt .quiet,
+#ask .faq dt,
+#ask .faq dd {
   font-size: 1.4rem;
   line-height: 1.4;
 }
@@ -555,18 +568,24 @@ body.overview {
 }
 
 .faq {
-  max-width: 42rem;
+  max-width: 48rem;
   margin: 0.5rem 0 0;
 }
 
 .faq dt {
   margin-top: 1.15rem;
   font-weight: var(--font-weight-semibold);
+  color: var(--color-text-primary);
 }
 
 .faq dd {
-  margin: 0.3rem 0 0;
+  margin: 0.35rem 0 0;
   color: var(--color-text-secondary);
+}
+
+#ask .faq strong {
+  color: var(--color-text-primary);
+  margin-right: 0.25rem;
 }
 
 section[id] {

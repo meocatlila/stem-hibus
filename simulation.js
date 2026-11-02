@@ -223,7 +223,7 @@
     var here = H.nearby();
     var message = "";
     if (state.error === "empty") message = "พิมพ์ชื่อปลายทาง แล้วกด Enter";
-    if (state.error === "none") message = "ไม่พบ “" + esc(state.query) + "” ในเมืองสาธิต ลองสามปุ่มด้านล่าง";
+    if (state.error === "none") message = "“" + esc(state.query) + "” อยู่นอกพื้นที่ให้บริการของชุดจำลอง ลองสามปุ่มด้านล่าง";
     if (state.error === "many") message = "พบหลายแห่ง เลือกจากปุ่มด้านล่าง";
     panel.innerHTML =
       '<p class="kicker">ตำแหน่งปัจจุบัน · ตรวจพบแล้ว</p>' +
