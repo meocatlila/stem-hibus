@@ -3,21 +3,40 @@
   var map = window.HIBUSMap.createMap(document.getElementById("net"));
   map.update({ time: H.DEMO_TIME, plan: null });
 
+  var caseTitles = {
+    uni: "เส้นทางตรง / ต่อเดียว",
+    mall: "เชื่อมต่อ 1 ครั้ง",
+    stadium: "เชื่อมต่อ 2 ครั้ง",
+  };
+  var caseRoutes = {
+    uni: "นั่งรถโดยสารสาย H2 สายเดียวถึงจุดหมาย",
+    mall: "นั่งสาย H2 แล้วเปลี่ยนเป็นสาย H1 ณ จุดเชื่อมต่อแยกตลาด",
+    stadium: "นั่งสาย H2 ต่อสาย H1 ณ แยกตลาด และต่อสาย H3 ณ สถานีกลาง",
+  };
   var list = document.getElementById("scenario-list");
   list.className = "scene-list";
   list.innerHTML = H.places
-    .map(function (place) {
+    .map(function (place, index) {
       var plan = H.planTrip(place.id, H.DEMO_TIME);
       return (
         '<article class="scene">' +
-        "<h3>" +
+        "<h3>กรณีศึกษาที่ " +
+        (index + 1) +
+        ": " +
         place.name +
-        "</h3>" +
-        "<p>" +
-        plan.label +
-        " · " +
-        plan.pathLabel +
+        " (" +
+        (caseTitles[place.id] || place.hint) +
+        ")</h3>" +
+        '<p class="scene-route"><strong>รูปแบบการเดินทาง</strong> ' +
+        (caseRoutes[place.id] || plan.pathLabel) +
         "</p>" +
+        '<p class="scene-result"><strong>ผลการคำนวณ</strong> ถึงเวลา ' +
+        H.formatTime(plan.arrival) +
+        " น. (ใช้เวลาเดินทาง " +
+        plan.minutes +
+        " นาที) | อัตราค่าโดยสาร " +
+        plan.fare.total +
+        " บาท</p>" +
         '<div class="nums">' +
         "<p><strong>" +
         H.formatTime(plan.arrival) +
@@ -29,6 +48,7 @@
         plan.fare.total +
         "</strong><span>บาท</span></p>" +
         "</div>" +
+        '<p class="scene-detail"><strong>รายละเอียดการประมวลผล</strong></p>' +
         "<ol>" +
         plan.reasons
           .map(function (reason) {

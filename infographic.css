@@ -162,7 +162,8 @@ body.overview {
 
 #aims,
 #benefits,
-#build {
+#build,
+#app {
   font-family: "THSarabunPSK", "Leelawadee UI", Tahoma, serif;
   font-size: 1.55rem;
   line-height: 1.35;
@@ -193,14 +194,31 @@ body.overview {
 #build .steps-list,
 #build .steps-list li,
 #build .sources,
-#build figcaption {
+#build figcaption,
+#app .folio,
+#app .folio span,
+#app h2,
+#app h3,
+#app .lede,
+#app .param-list,
+#app .param-list li,
+#app .flow,
+#app .flow strong,
+#app .flow span,
+#app .quiet,
+#app .scene,
+#app .scene h3,
+#app .scene p,
+#app .scene li,
+#app .scene .nums span {
   font-family: inherit;
   letter-spacing: 0;
 }
 
 #aims .folio,
 #benefits .folio,
-#build .folio {
+#build .folio,
+#app .folio {
   font-size: 1.35rem;
   font-weight: 700;
   color: var(--color-text-primary);
@@ -208,14 +226,16 @@ body.overview {
 
 #aims .folio span,
 #benefits .folio span,
-#build .folio span {
+#build .folio span,
+#app .folio span {
   font-size: 1.7rem;
   font-weight: 700;
 }
 
 #aims h2,
 #benefits h2,
-#build h2 {
+#build h2,
+#app h2 {
   max-width: none;
   font-size: 2.15rem;
   font-weight: 700;
@@ -237,7 +257,12 @@ body.overview {
 #benefits h3,
 #benefits li strong,
 #build h3,
-#build li strong {
+#build li strong,
+#app h3,
+#app .param-list strong,
+#app .flow strong,
+#app .scene h3,
+#app .scene strong {
   font-size: 1.45rem;
   font-weight: 700;
   color: var(--color-text-primary);
@@ -251,7 +276,13 @@ body.overview {
 #build .prose li,
 #build .steps-list li,
 #build .sources,
-#build figcaption {
+#build figcaption,
+#app .lede,
+#app .param-list li,
+#app .flow span,
+#app .quiet,
+#app .scene p,
+#app .scene li {
   font-size: 1.4rem;
   line-height: 1.4;
 }
@@ -263,7 +294,13 @@ body.overview {
 #build .prose li,
 #build .steps-list li,
 #build .sources,
-#build figcaption {
+#build figcaption,
+#app .lede,
+#app .param-list li,
+#app .flow span,
+#app .quiet,
+#app .scene p,
+#app .scene li {
   color: var(--color-text-secondary);
 }
 
@@ -272,20 +309,48 @@ body.overview {
 }
 
 #benefits li strong,
-#build li strong {
+#build li strong,
+#app .param-list strong,
+#app .scene strong {
   display: inline;
   margin-right: 0.25rem;
   font-size: 1.4rem;
 }
 
 #build .prose h3,
-#build .after {
+#build .after,
+#app h3,
+#app .after {
   margin-top: 0;
   color: var(--color-text-primary);
 }
 
 #build .split .prose h3 {
   margin-bottom: 0.65rem;
+}
+
+#app .param-list {
+  margin: 0.85rem 0 0;
+  padding: 0 0 0 1.2rem;
+  max-width: 46rem;
+}
+
+#app .param-list li {
+  margin: 0.45rem 0;
+}
+
+#app .flow {
+  max-width: 48rem;
+}
+
+#app .scene-route,
+#app .scene-result,
+#app .scene-detail {
+  margin: 0.35rem 0;
+}
+
+#app .scene .nums span {
+  font-size: 1.05rem;
 }
 
 .aims span,
