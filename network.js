@@ -345,9 +345,15 @@
     const rides = plan.legs.filter((leg) => leg.type === "ride");
     const first = plan.legs[0];
     if (first && first.type === "walk" && first.to === "market-h1") {
-      return "เดิน " + formatDistance(first.meters) + " ไปขึ้นสาย " + rides.map((ride) => ride.line).join(" ต่อ ");
+      return (
+        "การเดินเท้า " +
+        formatDistance(first.meters) +
+        " ไปขึ้นรถสาย " +
+        rides.map((ride) => ride.line).join(" แล้วต่อสาย ") +
+        " โดยตรง"
+      );
     }
-    if (rides.length === 1) return "นั่งสาย " + rides[0].line + " สายเดียว";
+    if (rides.length === 1) return "โดยสารรถประจำทางสาย " + rides[0].line + " สายเดียว";
     const at = rides
       .slice(0, -1)
       .map((ride) => nodes[ride.to].name)
@@ -371,38 +377,52 @@
     const firstRide = best.legs.find((leg) => leg.type === "ride");
     if (firstWait && firstWait.missed != null && firstRide) {
       reasons.push(
-        "รอบ " +
+        "การจัดการรอบรถ: รอบรถเวลา " +
           formatTime(firstWait.missed) +
-          " ของสาย " +
+          " น. ของสาย " +
           firstRide.line +
-          " ออกไปก่อนเดินถึงป้าย ระบบจึงจับรอบ " +
-          formatTime(firstRide.start)
+          " ออกเดินทางไปก่อนที่ผู้ใช้จะเดินเท้าถึงป้าย ระบบจึงปรับเปลี่ยนไปจับรอบ " +
+          formatTime(firstRide.start) +
+          " น. โดยอัตโนมัติ"
       );
     }
     if (alternatives.length) {
       const alt = alternatives[0];
       const later = alt.arrival - best.arrival;
-      let sentence = "อีกแผนหนึ่ง: " + describePath(alt) + " ถึง " + formatTime(alt.arrival);
+      let sentence =
+        "การเปรียบเทียบทางเลือกอื่น: หากเลือกแผนการเดินทางทางเลือกอื่น โดย" +
+        describePath(alt) +
+        " จะถึงจุดหมายเวลา " +
+        formatTime(alt.arrival) +
+        " น.";
       if (later > 0) {
-        sentence += " ช้ากว่า " + later + " นาที";
+        sentence += " (ล่าช้ากว่า " + later + " นาที";
         if (alt.fare.total < best.fare.total) {
-          sentence += " แม้ถูกกว่า " + (best.fare.total - alt.fare.total) + " บาท";
+          sentence +=
+            " ถึงแม้จะมีอัตราค่าโดยสารถูกกว่า " +
+            (best.fare.total - alt.fare.total) +
+            " บาท";
         }
-        sentence += " ระบบเลือกแผนที่ถึงก่อน";
+        sentence +=
+          ") ดังนั้น ระบบจึงคัดเลือกแผนการเดินทางที่ใช้เวลาน้อยที่สุดให้แก่ผู้ใช้";
       } else if (alt.walkMeters > best.walkMeters) {
         sentence +=
-          " เวลาเท่ากัน แต่เดินมากกว่า (" +
+          " เวลาถึงเท่ากัน แต่เดินมากกว่า (" +
           formatDistance(alt.walkMeters) +
-          ") ระบบเลือกแผนที่เดินน้อยกว่า";
+          ") ดังนั้น ระบบจึงคัดเลือกแผนที่เดินน้อยกว่า";
       }
       reasons.push(sentence);
     } else if (firstRide) {
-      reasons.push("จากตำแหน่งนี้ มีสายเดียวที่ไปถึงปลายทาง คือสาย " + firstRide.line);
+      reasons.push(
+        "รูปแบบเส้นทาง: จากตำแหน่งเริ่มต้น มีรถโดยสารสาย " +
+          firstRide.line +
+          " เพียงสายเดียวที่เดินทางถึงจุดหมายโดยตรง"
+      );
     }
     reasons.push(
       best.transfers > 0
-        ? "ค่าแรกเข้า 12 บาทคิดครั้งเดียวทั้งทริป การต่อสายไม่เก็บซ้ำ ระยะเดินไม่คิดเงิน"
-        : "ค่าโดยสารคือค่าแรกเข้า 12 บาท บวกระยะที่นั่งรถกิโลเมตรละ 4 บาท ระยะเดินไม่คิดเงิน"
+        ? "โครงสร้างอัตราค่าโดยสาร: คิดค่าบริการแรกเข้า 12 บาทเพียงครั้งเดียวตลอดการเดินทาง การเปลี่ยนสายรถโดยสารไม่มีการเรียกเก็บค่าแรกเข้าซ้ำซ้อน และระยะทางการเดินเท้าไม่นำมาคำนวณค่าบริการ"
+        : "โครงสร้างอัตราค่าโดยสาร: คิดค่าบริการแรกเข้า 12 บาท บวกค่าระยะทางกิโลเมตรละ 4 บาท และระยะทางการเดินเท้าไม่นำมาคำนวณค่าบริการ"
     );
     return reasons;
   }

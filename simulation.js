@@ -118,6 +118,34 @@
       .join("");
   }
 
+  function kmText(meters) {
+    return (meters / 1000).toFixed(1).replace(/\.0$/, "") + " กิโลเมตร";
+  }
+
+  function travelForm(plan) {
+    if (plan.transfers <= 0) return "สายเดียว";
+    return "ต่อรถ " + plan.transfers + " ครั้ง";
+  }
+
+  function formalRoute(plan) {
+    var rides = plan.legs.filter(function (leg) {
+      return leg.type === "ride";
+    });
+    if (!rides.length) return plan.pathLabel;
+    if (rides.length === 1) {
+      return "โดยสารรถประจำทางสาย " + rides[0].line + " สายเดียวถึงจุดหมาย";
+    }
+    var text = "โดยสารรถประจำทางสาย " + rides[0].line;
+    for (var i = 1; i < rides.length; i += 1) {
+      text +=
+        " และทำการเปลี่ยนสายเป็นสาย " +
+        rides[i].line +
+        " ณ จุดเชื่อมต่อ" +
+        H.nodes[rides[i - 1].to].name;
+    }
+    return text;
+  }
+
   function timeline(plan) {
     return (
       '<ol id="timeline" class="timeline">' +
@@ -132,8 +160,8 @@
             (leg.line ? ' data-line="' + leg.line + '"' : "") +
             '><span class="when num">' +
             H.formatTime(leg.start) +
-            "</span><span>" +
-            legText(leg) +
+            " น.</span><span>" +
+            formalLegText(leg, plan, index) +
             "</span></li>"
           );
         })
@@ -142,22 +170,105 @@
     );
   }
 
-  function legText(leg) {
-    if (leg.type === "walk") return esc(leg.label) + " · " + H.formatDistance(leg.meters);
-    if (leg.type === "wait") {
-      var missed = leg.missed != null ? "รอบ " + H.formatTime(leg.missed) + " ออกไปแล้ว · " : "";
-      return missed + "รอสาย " + leg.line + " ถึง " + H.formatTime(leg.end);
+  function formalLegText(leg, plan, index) {
+    var legs = plan.legs;
+    var next = legs[index + 1];
+    var waitCount = 0;
+    for (var i = 0; i < index; i += 1) {
+      if (legs[i].type === "wait") waitCount += 1;
     }
-    var via = leg.passed.length ? " ผ่าน" + leg.passed.join(" ") : "";
-    return "นั่งสาย " + leg.line + " " + H.formatKm(leg.meters) + via + " ลง " + H.formatTime(leg.end);
+    if (leg.type === "walk") {
+      if (index === 0) {
+        return (
+          "เริ่มต้นออกเดินทางจากจุดเริ่มต้น เดินเท้าไปยังป้ายรถโดยสารประจำทาง" +
+          esc(H.nodes[leg.to].name) +
+          " (ระยะทาง " +
+          leg.meters +
+          " เมตร)"
+        );
+      }
+      if (next && (next.type === "wait" || next.type === "ride")) {
+        var line = next.line;
+        return (
+          "ลงจากรถและเดินเท้าเปลี่ยนชานชาลาไปยังจุดจอดรถประจำทางสาย " +
+          line +
+          " (ระยะทาง " +
+          leg.meters +
+          " เมตร เนื่องจากชานชาลาต่างสายกัน)"
+        );
+      }
+      return (
+        "ลงจากรถและเดินเท้าเข้าสู่" +
+        esc(plan.place.name) +
+        " (ระยะทาง " +
+        leg.meters +
+        " เมตร) ถึงจุดหมายเวลา " +
+        H.formatTime(plan.arrival) +
+        " น."
+      );
+    }
+    if (leg.type === "wait") {
+      if (waitCount === 0 && leg.missed != null) {
+        return (
+          "เนื่องจากรอบรถเวลา " +
+          H.formatTime(leg.missed) +
+          " น. ของสาย " +
+          leg.line +
+          " ได้ออกเดินทางไปก่อนที่ผู้ใช้จะเดินเท้ามาถึงป้าย ระบบจึงทำการปรับเปลี่ยนไปเลือกใช้รอบรถเวลา " +
+          H.formatTime(leg.end) +
+          " น."
+        );
+      }
+      if (leg.missed != null) {
+        return (
+          "รอรถโดยสารประจำทางสาย " +
+          leg.line +
+          " (รอบรถเวลา " +
+          H.formatTime(leg.missed) +
+          " น. ออกเดินทางไปแล้ว ระบบจึงจัดสรรรอบรถถัดไปที่มาถึงเวลา " +
+          H.formatTime(leg.end) +
+          " น.)"
+        );
+      }
+      return (
+        "รอรถโดยสารประจำทางสาย " +
+        leg.line +
+        " จนถึงเวลา " +
+        H.formatTime(leg.end) +
+        " น."
+      );
+    }
+    var via = leg.passed.length ? " (ผ่าน" + leg.passed.join(" และ ") + ")" : "";
+    var hasLaterRide = legs.slice(index + 1).some(function (item) {
+      return item.type === "ride";
+    });
+    if (hasLaterRide) {
+      return (
+        "ขึ้นรถโดยสารประจำทางสาย " +
+        leg.line +
+        " เดินทางเป็นระยะทาง " +
+        kmText(leg.meters) +
+        " และลงรถ ณ จุดเชื่อมต่อ"
+      );
+    }
+    return (
+      "ขึ้นรถโดยสารประจำทางสาย " +
+      leg.line +
+      " เดินทางเป็นระยะทาง " +
+      kmText(leg.meters) +
+      via +
+      " จนถึงจุดหมายปลายทางเวลา " +
+      H.formatTime(leg.end) +
+      " น."
+    );
   }
 
   function metrics(plan) {
     return (
       '<div class="metrics">' +
-      metric(H.formatTime(plan.arrival), "ถึง") +
-      metric(plan.minutes + " นาที", "รวม") +
-      metric(plan.fare.total + " บาท", "ค่าโดยสาร") +
+      metric(H.formatTime(plan.arrival) + " น.", "เวลาถึงจุดหมาย") +
+      metric(plan.minutes + " นาที", "ระยะเวลาเดินทางรวม") +
+      metric(plan.fare.total + " บาท", "อัตราค่าโดยสารรวม") +
       "</div>"
     );
   }
@@ -181,21 +292,25 @@
   function fareNote(plan) {
     var raw = ((plan.rideMeters / 1000) * 4).toFixed(1);
     return (
-      "<p class=\"fine\">นั่งรถ " +
-      H.formatKm(plan.rideMeters) +
-      " × 4 บาท = " +
+      '<div class="fare-block">' +
+      "<p><strong>รายละเอียดการคำนวณ</strong> ระยะทางนั่งรถรวม " +
+      kmText(plan.rideMeters) +
+      " × อัตราค่าโดยสาร 4 บาทต่อกิโลเมตร = " +
       raw +
-      " ปัดเป็น " +
+      " บาท (ปัดเศษเป็น " +
       plan.fare.distanceFee +
-      " บาท · บวกค่าแรกเข้า " +
+      " บาท) รวมกับค่าแรกเข้า " +
       plan.fare.base +
-      " บาท · เดิน " +
-      H.formatDistance(plan.walkMeters) +
-      " ไม่คิดเงิน · แท็กซี่อ้างอิงระยะถนน " +
-      H.formatKm(plan.taxi.meters) +
-      " ประมาณ " +
+      " บาท ได้อัตราค่าโดยสารรวม " +
+      plan.fare.total +
+      " บาท (ระยะเดินเท้า " +
+      plan.walkMeters +
+      " เมตร ไม่คิดค่าบริการ)</p>" +
+      "<p><strong>ข้อมูลเปรียบเทียบ</strong> หากใช้บริการรถแท็กซี่ตามระยะทางถนนจริงประมาณ " +
+      kmText(plan.taxi.meters) +
+      " จะมีค่าโดยสารโดยประมาณ " +
       plan.taxi.total +
-      " บาท</p>"
+      " บาท</p></div>"
     );
   }
 
@@ -287,36 +402,69 @@
   function renderAnswer() {
     var plan = state.plan;
     var arrived = state.mode === "arrived";
+    var routeText = formalRoute(plan);
     panel.innerHTML =
-      '<p class="kicker">จาก' +
+      '<p class="kicker">ผลการจำลองเส้นทาง</p>' +
+      "<h2>จาก" +
       esc(H.nodes.home.name) +
-      " · " +
-      esc(plan.label) +
-      "</p>" +
-      "<h2>ไป" +
+      " สู่" +
       esc(plan.place.name) +
       "</h2>" +
       lateNote(plan) +
+      '<section class="report-block">' +
+      "<h3>1. ข้อมูลสรุปการเดินทาง</h3>" +
+      '<ul class="summary-list">' +
+      "<li><strong>จุดเริ่มต้น</strong> " +
+      esc(H.nodes.home.name) +
+      " (รูปแบบการเดินทาง: " +
+      esc(travelForm(plan)) +
+      ")</li>" +
+      "<li><strong>จุดหมายปลายทาง</strong> " +
+      esc(plan.place.name) +
+      "</li>" +
+      "<li><strong>เวลาถึงจุดหมาย</strong> " +
+      H.formatTime(plan.arrival) +
+      " น.</li>" +
+      "<li><strong>ระยะเวลาเดินทางรวม</strong> " +
+      plan.minutes +
+      " นาที</li>" +
+      "<li><strong>อัตราค่าโดยสารรวม</strong> " +
+      plan.fare.total +
+      " บาท</li>" +
+      "</ul>" +
       metrics(plan) +
+      "</section>" +
+      '<section class="report-block">' +
+      "<h3>2. แผนการเดินทางและอัลกอริทึมการเลือกเส้นทาง</h3>" +
       '<div class="narration" aria-live="polite">' +
       '<p class="kicker" id="live-kicker">' +
-      (arrived ? "ถึงปลายทาง" : "แผนที่เลือก") +
+      (arrived ? "ถึงปลายทาง" : "รูปแบบเส้นทางหลัก") +
       "</p>" +
       '<p class="narration-title" id="live-title">' +
-      esc(arrived ? "ถึง" + plan.place.name + "แล้ว" : plan.speech) +
+      esc(arrived ? "ถึง" + plan.place.name + "แล้ว" : routeText) +
       "</p>" +
       '<p id="live-detail">' +
-      esc(plan.pathLabel) +
+      esc(
+        arrived
+          ? "ใช้เวลา " + plan.minutes + " นาที · ค่าโดยสาร " + plan.fare.total + " บาท"
+          : "เงื่อนไขการตัดสินใจของระบบ"
+      ) +
       "</p>" +
-      '<p class="rule-line" id="live-rule">ระบบเลือกแผนที่ถึงก่อน แล้วค่อยดูค่าโดยสาร</p></div>' +
+      '<p class="rule-line" id="live-rule">ระบบจะคัดเลือกแผนเส้นทางที่ใช้เวลาเดินทางถึงจุดหมายรวดเร็วที่สุดเป็นอันดับแรก ก่อนที่จะนำมาพิจารณาเปรียบเทียบอัตราค่าโดยสาร</p></div></section>' +
+      '<section class="report-block">' +
+      "<h3>3. ลำดับขั้นตอนการเดินทางตามตารางเวลา (Timeline)</h3>" +
       timeline(plan) +
+      "</section>" +
+      '<section class="report-block">' +
+      "<h3>4. รายละเอียดเชิงวิเคราะห์และเงื่อนไขเพิ่มเติม</h3>" +
       reasons(plan) +
       fareNote(plan) +
+      "</section>" +
       '<div class="actions">' +
       (state.mode === "result"
         ? '<button type="button" class="btn btn-solid" id="start">เริ่มนำทาง</button>' +
           '<button type="button" class="btn" id="late">' +
-          (state.departAt === H.DEMO_TIME ? "ลองออก 08:18" : "กลับไป 08:12") +
+          (state.departAt === H.DEMO_TIME ? "จำลองเวลาออกเดินทาง 08:18 น." : "กลับไปเวลา 08:12 น.") +
           "</button>"
         : "") +
       '<button type="button" class="btn" id="reset">เปลี่ยนปลายทาง</button></div>';
@@ -331,7 +479,7 @@
   function renderControls() {
     if (state.mode === "result") {
       controls.innerHTML =
-        "<p>กดเริ่มนำทาง เพื่อให้จุดผู้ใช้เดินตามแผน หรือกดลองออก 08:18 ถ้าอยากเห็นระบบจับรอบรถใหม่</p>";
+        "<p>กดเริ่มนำทาง เพื่อให้จุดผู้ใช้เดินตามแผน หรือกดจำลองเวลาออกเดินทาง 08:18 น. หากต้องการให้ระบบคำนวณรอบรถใหม่</p>";
       return;
     }
     if (state.mode !== "nav" && state.mode !== "arrived") {
