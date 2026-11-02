@@ -160,6 +160,61 @@ body.overview {
   font-size: 1.05rem;
 }
 
+#aims {
+  font-family: "THSarabunPSK", "Leelawadee UI", Tahoma, serif;
+  font-size: 1.55rem;
+  line-height: 1.35;
+}
+
+#aims .folio,
+#aims .folio span,
+#aims h2,
+#aims .aims-purpose,
+#aims strong,
+#aims span {
+  font-family: inherit;
+  letter-spacing: 0;
+}
+
+#aims .folio {
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--color-text-primary);
+}
+
+#aims .folio span {
+  font-size: 1.7rem;
+  font-weight: 700;
+}
+
+#aims h2 {
+  max-width: none;
+  font-size: 2.15rem;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+#aims .aims-purpose {
+  margin: 0;
+  max-width: 46rem;
+  color: var(--color-text-primary);
+}
+
+#aims .aims {
+  max-width: 48rem;
+}
+
+#aims .aims strong {
+  font-size: 1.45rem;
+  font-weight: 700;
+  color: var(--color-text-primary);
+}
+
+#aims .aims span {
+  font-size: 1.4rem;
+  line-height: 1.4;
+}
+
 .aims span,
 .flow span,
 .pair li {
