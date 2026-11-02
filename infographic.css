@@ -160,7 +160,9 @@ body.overview {
   font-size: 1.05rem;
 }
 
-#aims {
+#aims,
+#benefits,
+#build {
   font-family: "THSarabunPSK", "Leelawadee UI", Tahoma, serif;
   font-size: 1.55rem;
   line-height: 1.35;
@@ -171,31 +173,58 @@ body.overview {
 #aims h2,
 #aims .aims-purpose,
 #aims strong,
-#aims span {
+#aims span,
+#benefits .folio,
+#benefits .folio span,
+#benefits h2,
+#benefits h3,
+#benefits .aims-purpose,
+#benefits .lede,
+#benefits .limit,
+#benefits strong,
+#benefits li,
+#build .folio,
+#build .folio span,
+#build h2,
+#build h3,
+#build .prose,
+#build .prose p,
+#build .prose li,
+#build .steps-list,
+#build .steps-list li,
+#build .sources,
+#build figcaption {
   font-family: inherit;
   letter-spacing: 0;
 }
 
-#aims .folio {
+#aims .folio,
+#benefits .folio,
+#build .folio {
   font-size: 1.35rem;
   font-weight: 700;
   color: var(--color-text-primary);
 }
 
-#aims .folio span {
+#aims .folio span,
+#benefits .folio span,
+#build .folio span {
   font-size: 1.7rem;
   font-weight: 700;
 }
 
-#aims h2 {
+#aims h2,
+#benefits h2,
+#build h2 {
   max-width: none;
   font-size: 2.15rem;
   font-weight: 700;
   line-height: 1.2;
 }
 
-#aims .aims-purpose {
-  margin: 0;
+#aims .aims-purpose,
+#benefits .aims-purpose {
+  margin: 0 0 0.55rem;
   max-width: 46rem;
   color: var(--color-text-primary);
 }
@@ -204,15 +233,59 @@ body.overview {
   max-width: 48rem;
 }
 
-#aims .aims strong {
+#aims .aims strong,
+#benefits h3,
+#benefits li strong,
+#build h3,
+#build li strong {
   font-size: 1.45rem;
   font-weight: 700;
   color: var(--color-text-primary);
 }
 
-#aims .aims span {
+#aims .aims span,
+#benefits .lede,
+#benefits li,
+#benefits .limit,
+#build .prose p,
+#build .prose li,
+#build .steps-list li,
+#build .sources,
+#build figcaption {
   font-size: 1.4rem;
   line-height: 1.4;
+}
+
+#benefits .lede,
+#benefits li,
+#benefits .limit,
+#build .prose p,
+#build .prose li,
+#build .steps-list li,
+#build .sources,
+#build figcaption {
+  color: var(--color-text-secondary);
+}
+
+#benefits h3 {
+  margin: 0 0 0.45rem;
+}
+
+#benefits li strong,
+#build li strong {
+  display: inline;
+  margin-right: 0.25rem;
+  font-size: 1.4rem;
+}
+
+#build .prose h3,
+#build .after {
+  margin-top: 0;
+  color: var(--color-text-primary);
+}
+
+#build .split .prose h3 {
+  margin-bottom: 0.65rem;
 }
 
 .aims span,
