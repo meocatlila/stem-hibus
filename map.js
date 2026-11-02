@@ -4,7 +4,7 @@
 
   var labelAt = {
     home: { dx: 16, dy: 6, anchor: "start" },
-    suanthong: { dx: 0, dy: -54, anchor: "middle", size: 12 },
+    suanthong: { dx: 0, dy: -16, anchor: "middle" },
     "market-h2": { dx: 0, dy: -16, anchor: "middle" },
     park: { dx: 0, dy: -16, anchor: "middle" },
     uni: { dx: 0, dy: -16, anchor: "middle" },

@@ -34,12 +34,9 @@ const unknown = H.matchPlace("สนามบิน");
 assert(unknown.error === "none", "unknown place");
 
 const stop = H.nodes.suanthong;
-assert(
-  stop.name === "โรงเรียนเซนต์ฟรังค์ซิสซาเวียร์คอนแวนต์",
-  "nearest stop name"
-);
-assert(stop.labelLines.join("") === stop.name, "map label is the full stop name");
-assert(stop.name.indexOf("สวนทอง") === -1, "stop is not สวนทอง");
-assert(H.nodes.home.name === "หมู่บ้านสวนทอง", "origin stays the village");
+assert(stop.name === "หมู่บ้านสวนทอง", "nearest stop name");
+assert(!stop.labelLines, "map uses the stop name in one line");
+assert(stop.name.indexOf("เซนต์ฟรังค์") === -1, "old school name is gone");
+assert(H.walks.find((walk) => walk.to === "suanthong").label === "เดินไปป้ายหมู่บ้านสวนทอง", "walk label");
 
 console.log("network.test.js ok");

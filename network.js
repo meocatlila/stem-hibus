@@ -18,8 +18,7 @@
     suanthong: {
       x: 132,
       y: 198,
-      name: "โรงเรียนเซนต์ฟรังค์ซิสซาเวียร์คอนแวนต์",
-      labelLines: ["โรงเรียนเซนต์ฟรังค์", "ซิสซาเวียร์คอนแวนต์"],
+      name: "หมู่บ้านสวนทอง",
       platform: "H2",
     },
     "market-h2": { x: 352, y: 198, name: "แยกตลาด", platform: "H2" },
@@ -78,7 +77,7 @@
   ];
 
   const walks = [
-    { from: "home", to: "suanthong", minutes: 4, meters: 280, label: "เดินไปป้ายโรงเรียนเซนต์ฟรังค์ซิสซาเวียร์คอนแวนต์" },
+    { from: "home", to: "suanthong", minutes: 4, meters: 280, label: "เดินไปป้ายหมู่บ้านสวนทอง" },
     { from: "home", to: "market-h1", minutes: 20, meters: 1400, label: "เดินไปป้ายแยกตลาด สาย H1" },
     { from: "market-h2", to: "market-h1", minutes: 2, meters: 120, label: "เดินเปลี่ยนไปชานชาลาสาย H1" },
     { from: "station-h1", to: "station-h3", minutes: 3, meters: 180, label: "เดินเปลี่ยนไปชานชาลาสาย H3" },
