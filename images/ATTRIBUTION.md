@@ -6,7 +6,8 @@
 - ใช้ประกอบเอกสารโครงงาน STEM ในหน้า HiBus Demo พร้อมลิงก์กลับไปหน้าสินค้า
 
 ## ภาพแนวคิดที่สร้างสำหรับโครงงาน
-- `vehicle/hibus-prototype-hero.jpg` ภาพรถต้นแบบไฮบัส
+- `vehicle/hibus-prototype-hero.jpg` ภาพรถต้นแบบไฮบัส (v4: คร่อมถนน ไม่มีคานขวาง มีรถเล็กใต้ท้อง และชานชาลายกสูง)
+- `vehicle/hibus-prototype-hero-v4.jpg` สำเนาเวอร์ชันล่าสุด
 - `vehicle/hibus-exploded-layers.jpg` ภาพแยกชั้นโครงสร้าง
 - `vehicle/hibus-track-stop.jpg` แผนภาพสนามและป้ายเทปคาด
 - `vehicle/hibus-materials-body.jpg` วัสดุทำตัวถังยกสูง
