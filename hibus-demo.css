@@ -1,0 +1,306 @@
+@import url("site.css");
+
+body.vehicle-demo {
+  font-size: 1.0625rem;
+  line-height: 1.75;
+}
+
+.wrap {
+  width: min(var(--max-width-wide), calc(100% - 1.5rem));
+  margin: 0 auto;
+}
+
+.hero,
+.section {
+  padding: 2.5rem 0 2.75rem;
+  border-bottom: 1px solid var(--color-border-secondary);
+}
+
+.hero h1 {
+  margin: 0 0 0.85rem;
+  font-size: clamp(1.85rem, 4vw, 2.7rem);
+  line-height: 1.25;
+  font-weight: var(--font-weight-semibold);
+}
+
+.toc {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem 0.85rem;
+  margin: 1.25rem 0 0;
+}
+
+.toc a {
+  text-decoration: none;
+  border-bottom: 1px solid var(--color-border-primary);
+  color: var(--color-text-primary);
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+}
+
+#parts,
+#principle,
+#logic,
+#code,
+#build,
+#risk {
+  font-family: "THSarabunPSK", "Leelawadee UI", Tahoma, serif;
+  font-size: 1.55rem;
+  line-height: 1.35;
+  letter-spacing: 0;
+}
+
+#parts .folio,
+#parts h2,
+#parts h3,
+#parts p,
+#parts li,
+#parts strong,
+#parts td,
+#parts th,
+#principle .folio,
+#principle h2,
+#principle h3,
+#principle p,
+#principle li,
+#principle strong,
+#logic .folio,
+#logic h2,
+#logic h3,
+#logic p,
+#logic li,
+#logic strong,
+#code .folio,
+#code h2,
+#code h3,
+#code p,
+#code li,
+#code strong,
+#build .folio,
+#build h2,
+#build h3,
+#build p,
+#build li,
+#build strong,
+#risk .folio,
+#risk h2,
+#risk h3,
+#risk p,
+#risk li,
+#risk strong,
+#risk td,
+#risk th {
+  font-family: inherit;
+  letter-spacing: 0;
+}
+
+.folio {
+  margin: 0 0 0.45rem;
+  font-size: 1.35rem;
+  font-weight: 700;
+}
+
+.folio span {
+  font-size: 1.7rem;
+  font-weight: 700;
+}
+
+.section h2 {
+  margin: 0 0 0.85rem;
+  max-width: none;
+  font-size: 2.15rem;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.section h3 {
+  margin: 1.75rem 0 0.7rem;
+  font-size: 1.45rem;
+  font-weight: 700;
+  line-height: 1.25;
+}
+
+.lede,
+.prose p,
+.quiet,
+.sources {
+  max-width: 48rem;
+  color: var(--color-text-secondary);
+  font-size: 1.4rem;
+  line-height: 1.45;
+}
+
+.lede {
+  margin: 0;
+  color: var(--color-text-primary);
+}
+
+.prose p {
+  margin: 0 0 0.9rem;
+}
+
+.parts-list,
+.steps-list,
+.check-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  max-width: 48rem;
+}
+
+.parts-list li,
+.steps-list li,
+.check-list li {
+  display: grid;
+  gap: 0.2rem;
+  padding: 0.95rem 0;
+  border-top: 1px solid var(--color-border-secondary);
+  font-size: 1.4rem;
+  line-height: 1.45;
+}
+
+.parts-list strong,
+.steps-list strong,
+.check-list strong {
+  color: var(--color-text-primary);
+  font-weight: 700;
+}
+
+.parts-list span,
+.steps-list span,
+.check-list span {
+  color: var(--color-text-secondary);
+}
+
+.data-table {
+  width: 100%;
+  max-width: 52rem;
+  border-collapse: collapse;
+  margin: 0.75rem 0 1.25rem;
+  font-size: 1.35rem;
+}
+
+.data-table th,
+.data-table td {
+  text-align: left;
+  vertical-align: top;
+  padding: 0.7rem 0.55rem;
+  border-top: 1px solid var(--color-border-secondary);
+}
+
+.data-table th {
+  font-weight: 700;
+  color: var(--color-text-primary);
+}
+
+.data-table td {
+  color: var(--color-text-secondary);
+}
+
+.state-flow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  align-items: center;
+  margin: 1rem 0 1.25rem;
+}
+
+.state-flow span {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 0.35rem 0.75rem;
+  border: 1px solid var(--color-border-primary);
+  background: var(--color-bg-secondary);
+  font-weight: 700;
+  font-size: 1.25rem;
+}
+
+.state-flow i {
+  font-style: normal;
+  color: var(--color-text-secondary);
+}
+
+.code-panel,
+.placeholder-panel {
+  margin: 1rem 0 1.5rem;
+  padding: 1rem 1.1rem;
+  border: 1px solid var(--color-border-primary);
+  background: var(--color-bg-secondary);
+  max-width: 52rem;
+}
+
+.code-panel pre {
+  margin: 0;
+  overflow-x: auto;
+  white-space: pre-wrap;
+  font-family: ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+  font-size: 0.95rem;
+  line-height: 1.55;
+  color: var(--color-text-primary);
+}
+
+.placeholder-panel {
+  border-style: dashed;
+}
+
+.placeholder-panel p {
+  margin: 0;
+  font-size: 1.35rem;
+  color: var(--color-text-secondary);
+}
+
+.arch {
+  margin: 1rem 0 1.5rem;
+  padding: 1rem 1.1rem;
+  border-left: 4px solid var(--color-border-primary);
+  background: var(--color-bg-tertiary);
+  max-width: 48rem;
+  font-size: 1.35rem;
+  line-height: 1.5;
+  color: var(--color-text-secondary);
+  white-space: pre-wrap;
+  font-family: ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+}
+
+.sources a {
+  color: var(--color-text-link);
+}
+
+@media (max-width: 720px) {
+  .data-table,
+  .data-table thead,
+  .data-table tbody,
+  .data-table th,
+  .data-table td,
+  .data-table tr {
+    display: block;
+  }
+
+  .data-table thead {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+  }
+
+  .data-table tr {
+    margin-bottom: 0.85rem;
+    border-top: 1px solid var(--color-border-secondary);
+    padding-top: 0.5rem;
+  }
+
+  .data-table td {
+    border: 0;
+    padding: 0.25rem 0;
+  }
+
+  .data-table td::before {
+    content: attr(data-label);
+    display: block;
+    font-weight: 700;
+    color: var(--color-text-primary);
+  }
+}

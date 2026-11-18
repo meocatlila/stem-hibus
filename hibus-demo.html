@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="th" data-theme="light">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>HiBus Demo · รถต้นแบบ KidBright</title>
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
+    <meta http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate">
+    <link rel="stylesheet" href="hibus-demo.css?v=20261118a">
+  </head>
+  <body class="vehicle-demo">
+    <a class="skip" href="#main">ข้ามไปเนื้อหา</a>
+    <header class="site-header">
+      <a class="brand" href="index.html">
+        <span class="wordmark">HIBUS</span>
+        <span class="brand-th">ไฮบัส</span>
+      </a>
+      <nav class="site-nav">
+        <a href="infographic.html">ภาพรวม</a>
+        <a href="simulation.html">จำลองแอป</a>
+        <a href="hibus-demo.html" aria-current="page">HiBus Demo</a>
+        <button class="theme-btn" id="theme" type="button">ธีมเข้ม</button>
+      </nav>
+    </header>
+    <main id="main">
+      <section class="hero" id="top">
+        <div class="wrap">
+          <h1>HiBus Demo</h1>
+          <p class="lede">เอกสารประกอบรถต้นแบบบน KidBright สำหรับวันสาธิต ครอบคลุมชิ้นส่วนอุปกรณ์ หลักการออกแบบ logic ควบคุมการเดินรถ และโครงโค้ดสำหรับแปลงเป็นบล็อกใน KidBright IDE</p>
+          <nav class="toc" aria-label="ในหน้านี้">
+            <a href="#parts">อุปกรณ์</a>
+            <a href="#principle">หลักการ</a>
+            <a href="#logic">Logic</a>
+            <a href="#code">โค้ด</a>
+            <a href="#build">ลำดับสร้าง</a>
+            <a href="#risk">ความเสี่ยง</a>
+          </nav>
+        </div>
+      </section>
+
+      <section class="section" id="parts">
+        <div class="wrap">
+          <p class="folio"><span>01</span> อุปกรณ์และวัสดุ</p>
+          <h2>ชิ้นส่วนที่ใช้สร้างรถต้นแบบ</h2>
+          <p class="lede">ชุดควบคุมใช้บอร์ด KidBright เป็นสมองหลัก ส่วนการหยุดที่ป้ายและตัวถังยกสูงเป็นงานออกแบบของโครงงาน ไม่ใช่ฟีเจอร์สำเร็จรูปของชุดตามเส้น</p>
+
+          <h3>อิเล็กทรอนิกส์และกลไกขับเคลื่อน</h3>
+          <ul class="parts-list">
+            <li>
+              <strong>KidBright32</strong>
+              <span>หน่วยประมวลผลหลัก อ่านค่าเซนเซอร์ รับปุ่มกด และสั่งมอเตอร์ผ่านไดรเวอร์ โปรแกรมด้วย KidBright IDE แบบบล็อก</span>
+            </li>
+            <li>
+              <strong>สาย Micro USB</strong>
+              <span>อัปโหลดโปรแกรมและจ่ายไฟตอนพัฒนา</span>
+            </li>
+            <li>
+              <strong>KB Robot Line Tracking Kit หรือชุดเทียบเท่า</strong>
+              <span>ฐานรถตามเส้น ประกอบด้วยไดรเวอร์มอเตอร์ KB Chain 2 ช่อง มอเตอร์และล้ออย่างน้อย 2 ชุด และเซนเซอร์อินฟราเรดตามเส้นอย่างน้อย 2 ตัว</span>
+            </li>
+            <li>
+              <strong>สาย KB Chain</strong>
+              <span>เชื่อม KidBright กับบอร์ดขับมอเตอร์ผ่านบัส I2C</span>
+            </li>
+            <li>
+              <strong>แหล่งจ่ายไฟแยกสำหรับมอเตอร์</strong>
+              <span>ถ่านหรือ LiPo ในย่านประมาณ 2.7–6.8 โวลต์ตามสเปกไดรเวอร์ เพื่อไม่ให้บอร์ดหลักรีเซ็ตตอนมอเตอร์สตาร์ท</span>
+            </li>
+            <li>
+              <strong>ปลั๊กอิน KB Chain Motor ใน KidBright IDE</strong>
+              <span>เปิดบล็อกสั่งมอเตอร์ซ้าย–ขวาหลังติดตั้งปลั๊กอิน</span>
+            </li>
+          </ul>
+
+          <h3>โครงสร้างตัวถังยกสูง</h3>
+          <ul class="parts-list">
+            <li>
+              <strong>โฟมบอร์ดหรือกระดาษแข็งหนา</strong>
+              <span>ทำตัวถัง หลังคา และผนังข้างรูปทรงรถโดยสาร</span>
+            </li>
+            <li>
+              <strong>เสารองหรือไม้ไอติม 4 ต้น</strong>
+              <span>ยกชั้นบนให้เกิดช่องลอดใต้ท้องรถ</span>
+            </li>
+            <li>
+              <strong>กาวร้อน สกรูสั้น หรือเทปสองหน้า</strong>
+              <span>ยึดโครงให้มั่นคงโดยไม่บังเซนเซอร์ IR</span>
+            </li>
+            <li>
+              <strong>สีหรือสติกเกอร์สาย</strong>
+              <span>สื่อความเป็นรถประจำทาง เช่น สาย H2</span>
+            </li>
+            <li>
+              <strong>รถของเล่นเตี้ย 1 คัน</strong>
+              <span>ใช้สาธิตการลอดใต้ท้องบนเวที</span>
+            </li>
+          </ul>
+
+          <h3>สนามสาธิต</h3>
+          <ul class="parts-list">
+            <li>
+              <strong>พื้นสว่าง</strong>
+              <span>กระดาษโปสเตอร์ แผ่นโฟมสีอ่อน หรือพื้นขาวบนโต๊ะสาธิต</span>
+            </li>
+            <li>
+              <strong>เทปดำเส้นทาง</strong>
+              <span>กำหนดเส้นวิ่งประจำสาย วงรีหรือเส้นปิดความกว้างสม่ำเสมอ</span>
+            </li>
+            <li>
+              <strong>เทปพันสายไฟดำคาดขวาง</strong>
+              <span>เครื่องหมายป้าย 2–3 จุด วางคาดบนเส้นทางให้เซนเซอร์ซ้ายและขวาอ่านดำพร้อมกัน</span>
+            </li>
+            <li>
+              <strong>ป้ายกระดาษชื่อสถานีจำลอง</strong>
+              <span>ติดข้างจุดคาดเพื่อให้กรรมการอ่านชื่อป้ายได้</span>
+            </li>
+          </ul>
+
+          <p class="sources">อ้างอิงอุปกรณ์: <a href="https://kid-bright.org/kidbright-en/">NECTEC KidBright</a>, <a href="https://www.kidbright.io/product-page/kidbright32-v1-6">KidBright32</a>, <a href="https://store.gravitechthai.com/product/kb-robot-line-tracking-kit/11001005073000628">KB Robot Line Tracking Kit</a>, <a href="https://github.com/gravitech-engineer/Plugins_KB_Chain">Plugins KB Chain</a></p>
+        </div>
+      </section>
+
+      <section class="section" id="principle">
+        <div class="wrap">
+          <p class="folio"><span>02</span> หลักการ</p>
+          <h2>หลักการออกแบบรถต้นแบบไฮบัส</h2>
+          <p class="lede">รถต้นแบบพิสูจน์สามเรื่องบนเวที ได้แก่ การวิ่งตามเส้น การหยุดเมื่อพบเครื่องหมายป้าย และการมีตัวถังยกสูงให้รถเตี้ยลอดใต้ได้</p>
+
+          <h3>สถาปัตยกรรมชิ้นงาน</h3>
+          <pre class="arch">ชั้นบน: ตัวถังโฟมบอร์ดรูปรถเมล์
+   │ เสารอง → ช่องลอดใต้ท้อง
+ชั้นล่าง: ล้อ + มอเตอร์ + IR หันลงพื้น
+   │ สาย KB Chain
+KidBright32: อ่าน IR + ปุ่ม → สั่งมอเตอร์
+สนาม: เทปดำเส้นทาง + เทปคาดขวาง = ป้าย</pre>
+
+          <h3>หลักการสำคัญ</h3>
+          <ul class="parts-list">
+            <li>
+              <strong>ตามเส้นด้วยอินฟราเรด</strong>
+              <span>เซนเซอร์ซ้าย–ขวาอ่านพื้นขาวและเส้นดำ แล้วปรับความเร็วล้อให้รถอยู่บนเส้น</span>
+            </li>
+            <li>
+              <strong>ป้ายคือแถบคาดขวาง</strong>
+              <span>เมื่อเซนเซอร์ทั้งสองอ่านดำพร้อมกัน ถือว่าถึงป้าย ไม่ใช้การจับเวลาอย่างเดียวเป็นวิธีหลัก</span>
+            </li>
+            <li>
+              <strong>คนควบคุมจังหวะสาธิตด้วยปุ่ม</strong>
+              <span>รถหยุดที่ป้ายจนกว่าจะกดปุ่มบน KidBright จึงไปต่อ ทำให้พิธีกรอธิบายได้ทัน</span>
+            </li>
+            <li>
+              <strong>ตัวถังยกสูงแยกจากอัลกอริทึมป้าย</strong>
+              <span>ช่องลอดเป็นงานโครงสร้าง โปรแกรมควบคุมยังทำงานบนชั้นล่างเหมือนรถตามเส้นทั่วไป</span>
+            </li>
+            <li>
+              <strong>รถกับแอปแยกกัน</strong>
+              <span>แอปจำลองเส้นทางในเว็บไม่ได้ดึงข้อมูลจากเซนเซอร์บนรถต้นแบบ</span>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="section" id="logic">
+        <div class="wrap">
+          <p class="folio"><span>03</span> Logic</p>
+          <h2>Logic ควบคุมการเดินรถ</h2>
+          <p class="lede">ใช้เครื่องสถานะสามโหมดหลัก เพื่อแยกการตามเส้น การรอปุ่มที่ป้าย และการคืบออกจากแถบคาด</p>
+
+          <div class="state-flow" aria-label="ลำดับสถานะ">
+            <span>FOLLOW</span><i>→</i>
+            <span>STOP_WAIT</span><i>→</i>
+            <span>LEAVE_MARK</span><i>→</i>
+            <span>FOLLOW</span>
+          </div>
+
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>สถานะ</th>
+                <th>เงื่อนไขเข้า</th>
+                <th>การทำงาน</th>
+                <th>เงื่อนไขออก</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td data-label="สถานะ"><strong>FOLLOW</strong></td>
+                <td data-label="เงื่อนไขเข้า">เริ่มงาน หรือพ้นแถบคาดแล้ว</td>
+                <td data-label="การทำงาน">อ่าน IR แล้ววิ่งตรง/เลี้ยวซ้าย/เลี้ยวขวา</td>
+                <td data-label="เงื่อนไขออก">L และ R เป็นดำพร้อมกัน</td>
+              </tr>
+              <tr>
+                <td data-label="สถานะ"><strong>STOP_WAIT</strong></td>
+                <td data-label="เงื่อนไขเข้า">ตรวจพบเทปคาดขวาง</td>
+                <td data-label="การทำงาน">หยุดมอเตอร์ รออธิบายบนเวที</td>
+                <td data-label="เงื่อนไขออก">กดปุ่มไปต่อบน KidBright</td>
+              </tr>
+              <tr>
+                <td data-label="สถานะ"><strong>LEAVE_MARK</strong></td>
+                <td data-label="เงื่อนไขเข้า">กดปุ่มหลังจอดป้าย</td>
+                <td data-label="การทำงาน">วิ่งตรงช้า ๆ เพื่อออกจากแถบคาด</td>
+                <td data-label="เงื่อนไขออก">พ้นแถบคาด แล้วกลับ FOLLOW</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <h3>กติกาอ่านเซนเซอร์ในโหมด FOLLOW</h3>
+          <ul class="parts-list">
+            <li><strong>L ขาว + R ขาว</strong><span>วิ่งตรง ความเร็ว V</span></li>
+            <li><strong>L ดำ + R ขาว</strong><span>เลี้ยวซ้ายหรือลดความเร็วล้อซ้าย</span></li>
+            <li><strong>L ขาว + R ดำ</strong><span>เลี้ยวขวาหรือลดความเร็วล้อขวา</span></li>
+            <li><strong>L ดำ + R ดำ</strong><span>เข้าป้าย หยุด และเปลี่ยนเป็น STOP_WAIT</span></li>
+          </ul>
+
+          <h3>จุดที่ต้องมีใน logic</h3>
+          <ul class="parts-list">
+            <li><strong>แยกปุ่มออกตัวกับปุ่มไปต่อ</strong><span>แนะนำ Switch1 เริ่มงาน Switch2 ออกจากป้าย</span></li>
+            <li><strong>ต้องมี LEAVE_MARK</strong><span>ถ้าไม่มี รถจะอ่านแถบคาดซ้ำแล้วหยุดทับที่เดิม</span></li>
+            <li><strong>คาลิเบรตดำ/ขาวบนสนามจริง</strong><span>แสงห้องเปลี่ยนค่าเซนเซอร์ได้</span></li>
+            <li><strong>ลดความเร็วเข้าป้าย</strong><span>กันการข้ามแถบคาด</span></li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="section" id="code">
+        <div class="wrap">
+          <p class="folio"><span>04</span> โค้ด</p>
+          <h2>โครงโค้ดควบคุมรถต้นแบบ</h2>
+          <p class="lede">ด้านล่างเป็นซูโดโค้ดสำหรับแปลงเป็นบล็อกใน KidBright IDE ส่วนภาพบล็อกจริงจะใส่เพิ่มเมื่อทีมถ่ายจากหน้าจอ IDE</p>
+
+          <h3>ซูโดโค้ดปัจจุบัน</h3>
+          <div class="code-panel">
+            <pre>เมื่อเริ่มต้น:
+  ตั้ง state = "FOLLOW"
+  หยุดมอเตอร์
+  (ทางเลือก) รอ กด Switch1 เพื่อออกตัวครั้งแรก
+
+วนซ้ำตลอด:
+  อ่าน L, R จากเซนเซอร์ IR
+
+  ถ้า state = "FOLLOW":
+    ถ้า L เป็นดำ และ R เป็นดำ:          // เจอเทปคาด = ป้าย
+      หยุดมอเตอร์ทั้งสอง
+      (ทางเลือก) แสดง "STOP" บนจอ / มีเสียงสั้น
+      ตั้ง state = "STOP_WAIT"
+
+    ไม่เช่นนั้นถ้า L ขาว และ R ขาว:
+      วิ่งตรง ความเร็ว V
+
+    ไม่เช่นนั้นถ้า L ดำ และ R ขาว:
+      เลี้ยวซ้าย / ลดความเร็วล้อซ้าย
+
+    ไม่เช่นนั้นถ้า L ขาว และ R ดำ:
+      เลี้ยวขวา / ลดความเร็วล้อขวา
+
+  ถ้า state = "STOP_WAIT":
+    มอเตอร์หยุด
+    ถ้า กดปุ่มไปต่อ (เช่น Switch2):
+      ตั้ง state = "LEAVE_MARK"
+
+  ถ้า state = "LEAVE_MARK":
+    วิ่งตรงช้า ๆ ความเร็ว V_slow
+    จนพ้นแถบคาด (L หรือ R กลับเป็นขาว หรือหน่วง t_clear)
+    ตั้ง state = "FOLLOW"</pre>
+          </div>
+          <p class="quiet">ไฟล์ข้อความในรีโป: <a href="kidbright/vehicle-control.pseudo.txt">kidbright/vehicle-control.pseudo.txt</a></p>
+
+          <h3>ช่องว่างสำหรับบล็อก KidBright จริง</h3>
+          <div class="placeholder-panel">
+            <p>ยังไม่มีภาพหรือไฟล์บล็อกจาก KidBright IDE ในรอบนี้ เมื่อทีมส่งภาพหน้าจอหรือส่งออกโปรเจกต์บล็อกแล้ว จะวางไว้ตรงนี้ และลิงก์ไฟล์ในโฟลเดอร์ <code>kidbright/</code></p>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="build">
+        <div class="wrap">
+          <p class="folio"><span>05</span> ลำดับสร้าง</p>
+          <h2>ลำดับงานสร้างและเกณฑ์สำเร็จ</h2>
+          <ol class="steps-list">
+            <li><strong>ประกอบฐานขับเคลื่อนและ IR</strong><span>ให้ตามเส้นได้ก่อน ยังไม่ติดตัวถัง</span></li>
+            <li><strong>วางเส้นทางและแถบคาด 1 จุด</strong><span>ทดสอบเงื่อนไขหยุดเมื่อ L และ R เป็นดำพร้อมกัน</span></li>
+            <li><strong>ใส่ STOP_WAIT และ LEAVE_MARK</strong><span>ทดสอบปุ่มไปต่อกับป้าย 2–3 จุดรอบวง</span></li>
+            <li><strong>ติดเสารองและตัวถังโฟมบอร์ด</strong><span>ตรวจว่าไม่บัง IR และไม่คว่ำตอนเลี้ยว</span></li>
+            <li><strong>ซ้อมบทสาธิต</strong><span>วิ่ง → หยุดป้าย → อธิบาย → กดปุ่ม → ไปต่อ → โชว์รถเตี้ยลอดใต้ท้อง</span></li>
+          </ol>
+
+          <h3>เกณฑ์สำเร็จวันสาธิต</h3>
+          <ul class="check-list">
+            <li><strong>ตามเส้นได้รอบวง</strong><span>ไม่หลุดเส้นบ่อยจนสาธิตไม่จบ</span></li>
+            <li><strong>หยุดครบทุกจุดคาด</strong><span>ทุกป้ายสั่งหยุดได้</span></li>
+            <li><strong>กดปุ่มแล้วไปต่อได้</strong><span>ไม่ค้างที่ป้ายเดิม</span></li>
+            <li><strong>เห็นช่องลอดใต้ท้อง</strong><span>มีรถเตี้ยผ่านได้ตอนสาธิต</span></li>
+            <li><strong>อธิบายกติกาป้ายได้</strong><span>ป้าย = เทปคาด + โปรแกรมตรวจ IR ทั้งสองตัว</span></li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="section" id="risk">
+        <div class="wrap">
+          <p class="folio"><span>06</span> ความเสี่ยง</p>
+          <h2>ความเสี่ยงและการแก้</h2>
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>ความเสี่ยง</th>
+                <th>การแก้</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td data-label="ความเสี่ยง">หยุดกลางเส้นเพราะเส้นหนาหรือคราบดำ</td>
+                <td data-label="การแก้">ทำเส้นทางบางสม่ำเสมอ และให้แถบป้ายหนาเฉพาะจุดคาด</td>
+              </tr>
+              <tr>
+                <td data-label="ความเสี่ยง">ไม่หยุดที่ป้าย</td>
+                <td data-label="การแก้">ทำแถบคาดกว้างขึ้น และลดความเร็วเข้าป้าย</td>
+              </tr>
+              <tr>
+                <td data-label="ความเสี่ยง">กดปุ่มแล้วยังติดป้ายเดิม</td>
+                <td data-label="การแก้">บังคับสถานะ LEAVE_MARK ก่อนกลับ FOLLOW</td>
+              </tr>
+              <tr>
+                <td data-label="ความเสี่ยง">ตัวถังพลิกตอนเลี้ยว</td>
+                <td data-label="การแก้">ลดความสูงหรือน้ำหนักชั้นบน และลดความเร็วเลี้ยว</td>
+              </tr>
+              <tr>
+                <td data-label="ความเสี่ยง">มอเตอร์ทำให้บอร์ดรีเซ็ต</td>
+                <td data-label="การแก้">แยกแหล่งจ่ายไฟมอเตอร์จากไฟควบคุม</td>
+              </tr>
+              <tr>
+                <td data-label="ความเสี่ยง">กรรมการเข้าใจว่าแอปสั่งรถ</td>
+                <td data-label="การแก้">ย้ำตั้งแต่ต้นว่าแอปกับบอร์ดแยกการทำงาน</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+    <script src="theme.js"></script>
+  </body>
+</html>
