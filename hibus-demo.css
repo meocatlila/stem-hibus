@@ -39,6 +39,7 @@ body.vehicle-demo {
   align-items: center;
 }
 
+#gallery,
 #parts,
 #principle,
 #logic,
@@ -51,14 +52,127 @@ body.vehicle-demo {
   letter-spacing: 0;
 }
 
+#gallery .folio,
+#gallery h2,
+#gallery h3,
+#gallery p,
+#gallery figcaption,
+#gallery strong,
+#gallery span {
+  font-family: inherit;
+  letter-spacing: 0;
+}
+
+.hero-figure {
+  margin: 1.1rem 0 1.5rem;
+  max-width: 56rem;
+}
+
+.hero-figure.compact {
+  max-width: 48rem;
+}
+
+.hero-figure img,
+.media-card img,
+.part-card img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border: 1px solid var(--color-border-secondary);
+  background: var(--color-bg-secondary);
+}
+
+.hero-figure figcaption,
+.media-card figcaption {
+  margin-top: 0.55rem;
+  font-size: 1.25rem;
+  line-height: 1.4;
+  color: var(--color-text-secondary);
+}
+
+.media-grid {
+  display: grid;
+  gap: 1rem;
+  margin: 0 0 0.5rem;
+}
+
+.media-grid.two {
+  grid-template-columns: 1fr;
+}
+
+.media-card {
+  margin: 0;
+}
+
+.part-grid {
+  display: grid;
+  gap: 1rem;
+  margin: 1rem 0 1.75rem;
+}
+
+.part-card {
+  display: grid;
+  gap: 0.75rem;
+  padding: 0.75rem;
+  border: 1px solid var(--color-border-secondary);
+  background: var(--color-bg-secondary);
+}
+
+.part-card img {
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+}
+
+.part-card strong {
+  display: block;
+  margin-bottom: 0.25rem;
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--color-text-primary);
+}
+
+.part-card span {
+  display: block;
+  font-size: 1.3rem;
+  line-height: 1.45;
+  color: var(--color-text-secondary);
+}
+
+.part-link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  margin-top: 0.35rem;
+  font-size: 1.2rem;
+}
+
+@media (min-width: 800px) {
+  .media-grid.two {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .part-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (min-width: 1100px) {
+  .part-grid {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+}
+
 #parts .folio,
 #parts h2,
 #parts h3,
 #parts p,
 #parts li,
 #parts strong,
+#parts span,
 #parts td,
 #parts th,
+#parts figcaption,
+#parts .part-link,
 #principle .folio,
 #principle h2,
 #principle h3,

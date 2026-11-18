@@ -6,7 +6,7 @@
     <title>HiBus Demo · รถต้นแบบ KidBright</title>
     <link rel="icon" href="favicon.svg" type="image/svg+xml">
     <meta http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate">
-    <link rel="stylesheet" href="hibus-demo.css?v=20261118a">
+    <link rel="stylesheet" href="hibus-demo.css?v=20261118b">
   </head>
   <body class="vehicle-demo">
     <a class="skip" href="#main">ข้ามไปเนื้อหา</a>
@@ -28,6 +28,7 @@
           <h1>HiBus Demo</h1>
           <p class="lede">เอกสารประกอบรถต้นแบบบน KidBright สำหรับวันสาธิต ครอบคลุมชิ้นส่วนอุปกรณ์ หลักการออกแบบ logic ควบคุมการเดินรถ และโครงโค้ดสำหรับแปลงเป็นบล็อกใน KidBright IDE</p>
           <nav class="toc" aria-label="ในหน้านี้">
+            <a href="#gallery">ภาพรถ</a>
             <a href="#parts">อุปกรณ์</a>
             <a href="#principle">หลักการ</a>
             <a href="#logic">Logic</a>
@@ -38,61 +39,105 @@
         </div>
       </section>
 
+      <section class="section" id="gallery">
+        <div class="wrap">
+          <p class="folio"><span>00</span> ภาพรถต้นแบบ</p>
+          <h2>แนวคิดรถไฮบัสยกสูงสำหรับวันสาธิต</h2>
+          <p class="lede">ภาพแนวคิดที่ออกแบบให้เห็นชั้นฐานตามเส้น ช่องลอดใต้ท้อง ตัวถังโฟมบอร์ด และบอร์ดควบคุมบนหลังคา พร้อมเส้นทางเทปดำและแถบคาดป้าย</p>
+          <figure class="hero-figure">
+            <img src="images/vehicle/hibus-prototype-hero.jpg" alt="ภาพแนวคิดรถต้นแบบไฮบัสยกสูงบนเส้นทางเทปดำ มีรถเตี้ยข้างลำตัวและบอร์ดควบคุมบนหลังคา" width="1280" height="720" loading="eager">
+            <figcaption>ภาพแนวคิดรถต้นแบบ STEM-HiBus · สาย H2 · ช่องลอดใต้ท้องชัดเจน</figcaption>
+          </figure>
+          <div class="media-grid two">
+            <figure class="media-card">
+              <img src="images/vehicle/hibus-exploded-layers.jpg" alt="ภาพแยกชั้นโครงสร้างรถ ตัวถัง บอร์ด เสารอง และฐานตามเส้น" width="1152" height="864" loading="lazy">
+              <figcaption>แยกชั้นโครงสร้าง: ตัวถัง · บอร์ด · เสารอง/ช่องลอด · ฐานขับเคลื่อน+IR</figcaption>
+            </figure>
+            <figure class="media-card">
+              <img src="images/vehicle/hibus-track-stop.jpg" alt="แผนภาพสนามวงรีเทปดำมีจุดป้ายคาดขวางสามจุด" width="1280" height="720" loading="lazy">
+              <figcaption>สนามสาธิตสายเดียว วงรี พร้อมป้ายเทปคาดขวาง 2–3 จุด</figcaption>
+            </figure>
+          </div>
+        </div>
+      </section>
+
       <section class="section" id="parts">
         <div class="wrap">
           <p class="folio"><span>01</span> อุปกรณ์และวัสดุ</p>
           <h2>ชิ้นส่วนที่ใช้สร้างรถต้นแบบ</h2>
           <p class="lede">ชุดควบคุมใช้บอร์ด KidBright เป็นสมองหลัก ส่วนการหยุดที่ป้ายและตัวถังยกสูงเป็นงานออกแบบของโครงงาน ไม่ใช่ฟีเจอร์สำเร็จรูปของชุดตามเส้น</p>
 
-          <h3>อิเล็กทรอนิกส์และกลไกขับเคลื่อน</h3>
-          <ul class="parts-list">
-            <li>
-              <strong>KidBright32</strong>
-              <span>หน่วยประมวลผลหลัก อ่านค่าเซนเซอร์ รับปุ่มกด และสั่งมอเตอร์ผ่านไดรเวอร์ โปรแกรมด้วย KidBright IDE แบบบล็อก</span>
-            </li>
-            <li>
-              <strong>สาย Micro USB</strong>
-              <span>อัปโหลดโปรแกรมและจ่ายไฟตอนพัฒนา</span>
-            </li>
-            <li>
-              <strong>KB Robot Line Tracking Kit หรือชุดเทียบเท่า</strong>
-              <span>ฐานรถตามเส้น ประกอบด้วยไดรเวอร์มอเตอร์ KB Chain 2 ช่อง มอเตอร์และล้ออย่างน้อย 2 ชุด และเซนเซอร์อินฟราเรดตามเส้นอย่างน้อย 2 ตัว</span>
-            </li>
-            <li>
-              <strong>สาย KB Chain</strong>
-              <span>เชื่อม KidBright กับบอร์ดขับมอเตอร์ผ่านบัส I2C</span>
-            </li>
-            <li>
-              <strong>แหล่งจ่ายไฟแยกสำหรับมอเตอร์</strong>
-              <span>ถ่านหรือ LiPo ในย่านประมาณ 2.7–6.8 โวลต์ตามสเปกไดรเวอร์ เพื่อไม่ให้บอร์ดหลักรีเซ็ตตอนมอเตอร์สตาร์ท</span>
-            </li>
-            <li>
-              <strong>ปลั๊กอิน KB Chain Motor ใน KidBright IDE</strong>
-              <span>เปิดบล็อกสั่งมอเตอร์ซ้าย–ขวาหลังติดตั้งปลั๊กอิน</span>
-            </li>
-          </ul>
+          <h3>บอร์ดและชุดอิเล็กทรอนิกส์</h3>
+          <div class="part-grid">
+            <article class="part-card">
+              <img src="images/parts/kidbright32.jpg" alt="บอร์ด KidBright32 เห็นจอ LED matrix และปุ่ม S1 S2" width="1000" height="666" loading="lazy">
+              <div>
+                <strong>KidBright32</strong>
+                <span>สมองควบคุม ESP32 จอ LED 16×8 ปุ่ม S1/S2 เซนเซอร์ในตัว และพอร์ตขยาย ใช้โปรแกรมบล็อกใน KidBright IDE</span>
+                <a class="part-link" href="https://www.kidbright.io/product-page/kidbright32-v1-6">หน้าสินค้า</a>
+              </div>
+            </article>
+            <article class="part-card">
+              <img src="images/parts/kidbright-detail-2.jpg" alt="ชุด KidBright32 V1.6 ในกล่องพร้อมสาย USB สีเขียวและเซอร์โว" width="1000" height="666" loading="lazy">
+              <div>
+                <strong>ชุดเริ่มต้น / สาย Micro USB</strong>
+                <span>ใช้สาย USB อัปโหลดโปรแกรมและจ่ายไฟตอนพัฒนา ชุด Beginner มักมีสายสีเขียวและกล่องเก็บของ</span>
+                <a class="part-link" href="https://www.kidbright.io/product-page/kidbright32-v1-6-beginner-pack">หน้าสินค้า</a>
+              </div>
+            </article>
+            <article class="part-card">
+              <img src="images/parts/kb-chain-alt.png" alt="บอร์ด KB Chain 2-CH 1A DC Motor Driver" width="1000" height="561" loading="lazy">
+              <div>
+                <strong>KB Chain Motor Driver 2 ช่อง</strong>
+                <span>ขับมอเตอร์ซ้าย–ขวาผ่าน I2C ย่านประมาณ 2.7–6.8 V กระแสสูงสุดราว 1 A ต่อช่อง เชื่อมด้วยสาย KB Chain</span>
+                <a class="part-link" href="https://www.kidbright.io/product-page/kb-chain-2-ch-1a-dc-motor-driver">หน้าสินค้า</a>
+              </div>
+            </article>
+            <article class="part-card">
+              <img src="images/parts/ir-line-sensor.jpg" alt="เซนเซอร์อินฟราเรดตามเส้นแบบโมดูลเล็ก" width="1024" height="1024" loading="lazy">
+              <div>
+                <strong>เซนเซอร์ IR ตามเส้น ≥ 2 ตัว</strong>
+                <span>อ่านพื้นขาว/เส้นดำ สำหรับตามทาง และใช้คู่กันตรวจแถบเทปคาดขวางเมื่อถึงป้าย</span>
+              </div>
+            </article>
+            <article class="part-card">
+              <img src="images/parts/dc-motor-wheel.jpg" alt="มอเตอร์กระแสตรงพร้อมล้อยางหุ่นยนต์" width="1024" height="1024" loading="lazy">
+              <div>
+                <strong>มอเตอร์ DC + ล้อ 2 ชุด</strong>
+                <span>ขับเคลื่อนฐานรถตามเส้น ควรมีล้ออิสระช่วยทรงตัว และแยกไฟมอเตอร์จากไฟบอร์ดหลัก</span>
+              </div>
+            </article>
+            <article class="part-card">
+              <img src="images/parts/mega-bundle-open.jpg" alt="ตัวอย่างชุดอุปกรณ์เสริม KidBright มีฮับ สาย และเซนเซอร์หลายชนิด" width="1000" height="561" loading="lazy">
+              <div>
+                <strong>สาย KB Chain / อุปกรณ์เสริม</strong>
+                <span>สายเชื่อม I2C ระหว่างบอร์ดกับไดรเวอร์ และอุปกรณ์ข้างเคียงตามชุดที่โรงเรียนมี เช่น ฮับหรือกล่องถ่าน</span>
+                <a class="part-link" href="https://store.gravitechthai.com/product/kb-robot-line-tracking-kit/11001005073000628">ชุดตามเส้น</a>
+              </div>
+            </article>
+          </div>
 
           <h3>โครงสร้างตัวถังยกสูง</h3>
+          <figure class="hero-figure compact">
+            <img src="images/vehicle/hibus-materials-body.jpg" alt="วัสดุทำตัวถังโฟมบอร์ด เสารอง กาวร้อน เทปดำ และรถของเล่นเตี้ย" width="1152" height="864" loading="lazy">
+            <figcaption>วัสดุโครงยกสูง: โฟมบอร์ด · เสารอง · กาวร้อน · เทปดำ · รถเตี้ยสำหรับสาธิตลอดใต้ท้อง</figcaption>
+          </figure>
           <ul class="parts-list">
             <li>
               <strong>โฟมบอร์ดหรือกระดาษแข็งหนา</strong>
-              <span>ทำตัวถัง หลังคา และผนังข้างรูปทรงรถโดยสาร</span>
+              <span>ทำตัวถัง หลังคา และผนังข้างรูปทรงรถโดยสาร สีแนะนำโทนเขียวน้ำทะเล/ทราย ไม่ให้ศูนย์ถ่วงสูงเกิน</span>
             </li>
             <li>
-              <strong>เสารองหรือไม้ไอติม 4 ต้น</strong>
-              <span>ยกชั้นบนให้เกิดช่องลอดใต้ท้องรถ</span>
+              <strong>เสารอง 4 ต้น</strong>
+              <span>ยกชั้นบนให้เกิดช่องลอดใต้ท้อง เผื่อความสูงรถของเล่นที่ใช้สาธิต</span>
             </li>
             <li>
               <strong>กาวร้อน สกรูสั้น หรือเทปสองหน้า</strong>
-              <span>ยึดโครงให้มั่นคงโดยไม่บังเซนเซอร์ IR</span>
+              <span>ยึดโครงให้มั่นคงโดยไม่บังเซนเซอร์ IR ที่หันลงพื้น</span>
             </li>
             <li>
-              <strong>สีหรือสติกเกอร์สาย</strong>
-              <span>สื่อความเป็นรถประจำทาง เช่น สาย H2</span>
-            </li>
-            <li>
-              <strong>รถของเล่นเตี้ย 1 คัน</strong>
-              <span>ใช้สาธิตการลอดใต้ท้องบนเวที</span>
+              <strong>ป้ายปลายทาง H2 / สติกเกอร์สาย</strong>
+              <span>สื่อความเป็นรถประจำทาง ไม่ให้ดูเป็นหุ่นยนต์เปล่า</span>
             </li>
           </ul>
 
@@ -100,23 +145,23 @@
           <ul class="parts-list">
             <li>
               <strong>พื้นสว่าง</strong>
-              <span>กระดาษโปสเตอร์ แผ่นโฟมสีอ่อน หรือพื้นขาวบนโต๊ะสาธิต</span>
+              <span>กระดาษโปสเตอร์หรือแผ่นโฟมสีอ่อนบนโต๊ะสาธิต</span>
             </li>
             <li>
               <strong>เทปดำเส้นทาง</strong>
-              <span>กำหนดเส้นวิ่งประจำสาย วงรีหรือเส้นปิดความกว้างสม่ำเสมอ</span>
+              <span>เส้นวิ่งประจำสาย วงรีหรือเส้นปิด ความกว้างสม่ำเสมอ</span>
             </li>
             <li>
               <strong>เทปพันสายไฟดำคาดขวาง</strong>
-              <span>เครื่องหมายป้าย 2–3 จุด วางคาดบนเส้นทางให้เซนเซอร์ซ้ายและขวาอ่านดำพร้อมกัน</span>
+              <span>เครื่องหมายป้าย 2–3 จุด ให้เซนเซอร์ซ้ายและขวาอ่านดำพร้อมกัน</span>
             </li>
             <li>
-              <strong>ป้ายกระดาษชื่อสถานีจำลอง</strong>
+              <strong>ป้ายกระดาษชื่อสถานี</strong>
               <span>ติดข้างจุดคาดเพื่อให้กรรมการอ่านชื่อป้ายได้</span>
             </li>
           </ul>
 
-          <p class="sources">อ้างอิงอุปกรณ์: <a href="https://kid-bright.org/kidbright-en/">NECTEC KidBright</a>, <a href="https://www.kidbright.io/product-page/kidbright32-v1-6">KidBright32</a>, <a href="https://store.gravitechthai.com/product/kb-robot-line-tracking-kit/11001005073000628">KB Robot Line Tracking Kit</a>, <a href="https://github.com/gravitech-engineer/Plugins_KB_Chain">Plugins KB Chain</a></p>
+          <p class="sources">ภาพสินค้าอ้างจากหน้าผู้จัดจำหน่าย KidBright/Gravitech เพื่อการศึกษา · ภาพรถและวัสดุโครงเป็นภาพแนวคิดของโครงงาน · รายละเอียดที่มาใน <a href="images/ATTRIBUTION.md">images/ATTRIBUTION.md</a> · อ้างอิง: <a href="https://kid-bright.org/kidbright-en/">NECTEC</a>, <a href="https://www.kidbright.io/product-page/kidbright32-v1-6">KidBright32</a>, <a href="https://store.gravitechthai.com/product/kb-robot-line-tracking-kit/11001005073000628">KB Robot Line Tracking Kit</a>, <a href="https://github.com/gravitech-engineer/Plugins_KB_Chain">Plugins KB Chain</a></p>
         </div>
       </section>
 
@@ -133,6 +178,7 @@
    │ สาย KB Chain
 KidBright32: อ่าน IR + ปุ่ม → สั่งมอเตอร์
 สนาม: เทปดำเส้นทาง + เทปคาดขวาง = ป้าย</pre>
+          <p class="quiet">ดูภาพแยกชั้นและสนามได้ในส่วน <a href="#gallery">ภาพรถ</a></p>
 
           <h3>หลักการสำคัญ</h3>
           <ul class="parts-list">
